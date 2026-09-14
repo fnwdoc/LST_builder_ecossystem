@@ -1,10 +1,10 @@
-<!-- © FNW Advisory & Partners — LST Studio Builder v5.1.2 (Responsivo Independente Mobile/Tablet/Desktop) -->
+<!-- © FNW Advisory & Partners — LST Studio Builder v3.2.0 (Responsivo Independente Mobile/Tablet/Desktop) -->
 <!doctype html>
 <html lang="pt-BR" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LST Studio Builder v5.1 - FNW Ecosystem</title>
+<title>LST Studio Builder v5.1.3 - FNW Ecosystem</title>
 
 <!-- Google Fonts & Tailwind -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1929,7 +1929,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
       <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/69971d1031628_FNWNEWLogo_26.png" alt="FNW Logo" class="h-[42px] w-auto object-contain drop-shadow-[0_0_10px_rgba(147,107,255,0.45)] transition hover:scale-105" />
       <div class="flex items-center gap-2">
         <h1 class="font-black text-base text-white tracking-tight leading-none"><span class="text-white">LST</span> <span class="theme-accent-text" id="header-branding-title" style="color:var(--theme-c1,#3b82f6)">Studio</span></h1>
-        <span id="header-version-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono shadow-sm transition-all" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); border: 1px solid rgba(var(--theme-c1-rgb, 59, 130, 246), 0.5); color: var(--theme-c1, #60a5fa);">v5.1</span>
+        <span id="header-version-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono shadow-sm transition-all" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); border: 1px solid rgba(var(--theme-c1-rgb, 59, 130, 246), 0.5); color: var(--theme-c1, #60a5fa);">v5.1.3</span>
       </div>
     </div>
 
@@ -4459,33 +4459,82 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
             </div>
           </div>
 
-          <!-- CARD 2: OTIMIZAÇÃO & DISPARO DE EVENTOS DE CONVERSÃO -->
+          <!-- CARD 2: OTIMIZAÇÃO & DISPARO DE EVENTOS DE CONVERSÃO (GTM PRO SUITE) -->
           <div class="card-control p-5 space-y-4" id="card-expert-events">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between flex-wrap gap-2">
               <div class="flex items-center gap-2">
                 <span class="text-xl">⚡</span>
                 <div>
-                  <h3 class="text-xs font-black uppercase tracking-wider text-neutral-200">Otimização de Eventos de Conversão</h3>
-                  <p class="text-[11px] text-neutral-400">Configure os nomes dos eventos disparados nos pixels para treinar o algoritmo de tráfego.</p>
+                  <h3 class="text-xs font-black uppercase tracking-wider text-neutral-200 flex items-center gap-2">
+                    <span>Otimização de Eventos de Conversão &amp; GTM Pro</span>
+                    <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/40">v5.1.3 Full DataLayer</span>
+                  </h3>
+                  <p class="text-[11px] text-neutral-400">Todos os marcos do funil são disparados no DataLayer do GTM, GA4, Meta e TikTok.</p>
                 </div>
+              </div>
+              <button type="button" onclick="downloadGTMContainerJSON()" class="tool-btn !text-xs !py-1.5 !px-3 font-bold flex items-center gap-1.5 cursor-pointer bg-blue-600/20 text-blue-300 border border-blue-500/40 hover:bg-blue-600/30" title="Baixar Container Oficial (.json) para importar no Google Tag Manager">
+                <span>📦</span> Baixar Container GTM (.json) ⬇️
+              </button>
+            </div>
+
+            <!-- GRID DOS 6 EVENTOS DO FUNIL -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+              <div>
+                <label class="block text-[11px] font-bold text-neutral-300 uppercase mb-1 flex items-center gap-1.5">
+                  <span>🚀</span> 1. Início do Quiz
+                </label>
+                <input class="input-field font-mono text-xs" id="cfg-tracking-ev-quiz-start" oninput="syncTrackingInputs()" value="quiz_start" placeholder="quiz_start">
+                <span class="text-[10px] text-neutral-500 mt-0.5 block">Dispara ao clicar para começar o quiz.</span>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-neutral-300 uppercase mb-1 flex items-center gap-1.5">
+                  <span>📝</span> 2. Formulário Aberto
+                </label>
+                <input class="input-field font-mono text-xs" id="cfg-tracking-ev-form-open" oninput="syncTrackingInputs()" value="formulario_aberto" placeholder="formulario_aberto">
+                <span class="text-[10px] text-neutral-500 mt-0.5 block">Dispara ao exibir a tela de captura.</span>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-neutral-300 uppercase mb-1 flex items-center gap-1.5">
+                  <span>📥</span> 3. Cadastro Concluído
+                </label>
+                <input class="input-field font-mono text-xs" id="cfg-tracking-ev-cadastro" oninput="syncTrackingInputs()" value="cadastro" placeholder="cadastro">
+                <span class="text-[10px] text-neutral-500 mt-0.5 block">Dispara no envio dos dados do lead.</span>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-neutral-300 uppercase mb-1 flex items-center gap-1.5">
+                  <span>📊</span> 4. Resultado Gerado
+                </label>
+                <input class="input-field font-mono text-xs" id="cfg-tracking-ev-result" oninput="syncTrackingInputs()" value="resultado_gerado" placeholder="resultado_gerado">
+                <span class="text-[10px] text-neutral-500 mt-0.5 block">Dispara ao exibir o Score e Diagnóstico.</span>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-neutral-300 uppercase mb-1 flex items-center gap-1.5">
+                  <span>🏆</span> 5. Lead Qualificado
+                </label>
+                <input class="input-field font-mono text-xs" id="cfg-tracking-ev-qual" oninput="syncTrackingInputs()" value="Lead_Qualificado_LST" placeholder="Lead_Qualificado_LST">
+                <span class="text-[10px] text-neutral-500 mt-0.5 block">Score &gt;= Corte (dispara também lead_qualificado).</span>
+              </div>
+
+              <div>
+                <label class="block text-[11px] font-bold text-neutral-300 uppercase mb-1 flex items-center gap-1.5">
+                  <span>⛔</span> 6. Lead Desqualificado
+                </label>
+                <input class="input-field font-mono text-xs" id="cfg-tracking-ev-desqual" oninput="syncTrackingInputs()" value="Lead_Desqualificado_LST" placeholder="Lead_Desqualificado_LST">
+                <span class="text-[10px] text-neutral-500 mt-0.5 block">Knockout ou score abaixo da nota de corte.</span>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-[11px] font-bold text-neutral-300 uppercase mb-1.5 flex items-center gap-1.5">
-                  <span>🏆</span> Evento de Lead Qualificado (Score &gt;= Corte)
-                </label>
-                <input class="input-field font-mono text-xs" id="cfg-tracking-ev-qual" oninput="syncTrackingInputs()" value="Lead_Qualificado_LST">
-                <span class="text-[10px] text-neutral-500 mt-1 block">Disparado apenas quando o lead atinge o score de qualificação comercial.</span>
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-neutral-300 uppercase mb-1.5 flex items-center gap-1.5">
-                  <span>⛔</span> Evento de Lead Desqualificado / Knockout
-                </label>
-                <input class="input-field font-mono text-xs" id="cfg-tracking-ev-desqual" oninput="syncTrackingInputs()" value="Lead_Desqualificado_LST">
-                <span class="text-[10px] text-neutral-500 mt-1 block">Disparado quando o lead é eliminado por knockout ou score insuficiente.</span>
-              </div>
+            <div class="p-3 bg-[#090b10] border border-neutral-800 rounded-xl flex items-center justify-between flex-wrap gap-2 text-xs">
+              <span class="text-[11px] text-neutral-400">
+                💡 <strong>Compatibilidade Total:</strong> O LST envia simultaneamente os formatos snake_case (<code>quiz_start</code>) e com espaço (<code>quiz start</code>) para reconhecer qualquer gatilho no GTM Debug View!
+              </span>
+              <button type="button" onclick="downloadGTMContainerJSON()" class="text-blue-400 hover:underline font-bold text-xs flex items-center gap-1">
+                Importar Container GTM em 1 Clique ↗
+              </button>
             </div>
           </div>
 
@@ -4930,7 +4979,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
       </span>
       <div class="h-3 w-[1px] bg-neutral-800 hidden sm:block"></div>
       <span class="text-[10px] text-emerald-400/90 font-mono font-bold flex items-center gap-1">
-        <span>&#9889;</span> LST Engine v5.1 • Netlify Deploy Ativo
+        <span>&#9889;</span> LST Engine v5.1.3 • GTM Pro & Netlify Deploy Ativos
       </span>
     </div>
   </footer>
@@ -7731,7 +7780,7 @@ if (document.readyState === 'loading') {
 
 
 // ============================================================================
-// MOTOR DE DEPLOY NETLIFY ONE-CLICK & EMPACOTAMENTO ZIP (v5.1 High-Speed CORS)
+// MOTOR DE DEPLOY NETLIFY ONE-CLICK & EMPACOTAMENTO ZIP (v5.1.3 High-Speed CORS & GTM Pro)
 // ============================================================================
 var netlifyDeployEngine = window.netlifyDeployEngine = (() => {
   const LS_TOKEN_KEY = "lst_netlify_token";
@@ -9990,6 +10039,15 @@ function populateTrackingInputs() {
   if (utmsInput) utmsInput.checked = trk.captureUtms !== false;
   if (evQualInput) evQualInput.value = trk.trackQualifiedEvent || 'Lead_Qualificado_LST';
   if (evDesqualInput) evDesqualInput.value = trk.trackDisqualifiedEvent || 'Lead_Desqualificado_LST';
+  
+  const evQuizStartInput = document.getElementById('cfg-tracking-ev-quiz-start');
+  if (evQuizStartInput) evQuizStartInput.value = trk.trackQuizStartEvent || 'quiz_start';
+  const evFormOpenInput = document.getElementById('cfg-tracking-ev-form-open');
+  if (evFormOpenInput) evFormOpenInput.value = trk.trackFormOpenEvent || 'formulario_aberto';
+  const evCadastroInput = document.getElementById('cfg-tracking-ev-cadastro');
+  if (evCadastroInput) evCadastroInput.value = trk.trackCadastroEvent || 'cadastro';
+  const evResultInput = document.getElementById('cfg-tracking-ev-result');
+  if (evResultInput) evResultInput.value = trk.trackResultEvent || 'resultado_gerado';
   if (webhookExpertInput) webhookExpertInput.value = currentConfig.webhook || '';
   
   const drawerVideoInput = document.getElementById('cfg-tracking-drawer-video');
@@ -10027,6 +10085,216 @@ function syncDrawerVideoExpert(val) {
   refreshPreview();
 }
 
+
+// ==========================================
+// GERADOR DE CONTAINER OFICIAL DO GOOGLE TAG MANAGER (v5.1.3)
+// ==========================================
+function downloadGTMContainerJSON() {
+  const gtmId = (document.getElementById('cfg-tracking-gtm')?.value || currentConfig?.tracking?.gtmId || '').trim() || 'GTM-LST_QUALIFIER';
+  const brand = (currentConfig?.brandName || 'LST').replace(/[^a-zA-Z0-9_-]/g, '_');
+  
+  const container = {
+    "exportFormatVersion": 2,
+    "exportTime": new Date().toISOString(),
+    "containerVersion": {
+      "path": "accounts/1/containers/1/versions/0",
+      "accountId": "1",
+      "containerId": "1",
+      "container": {
+        "name": "LST Qualifier - " + brand + " (v5.1.3)",
+        "publicId": gtmId,
+        "usageContext": ["WEB"]
+      },
+      "tag": [
+        {
+          "name": "GA4 - Event - Quiz Start",
+          "type": "gaawe",
+          "parameter": [
+            { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+            { "type": "TEMPLATE", "key": "eventName", "value": "quiz_start" }
+          ],
+          "firingTriggerId": ["201"]
+        },
+        {
+          "name": "GA4 - Event - Formulario Aberto",
+          "type": "gaawe",
+          "parameter": [
+            { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+            { "type": "TEMPLATE", "key": "eventName", "value": "formulario_aberto" }
+          ],
+          "firingTriggerId": ["202"]
+        },
+        {
+          "name": "GA4 - Event - Cadastro Lead",
+          "type": "gaawe",
+          "parameter": [
+            { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+            { "type": "TEMPLATE", "key": "eventName", "value": "generate_lead" }
+          ],
+          "firingTriggerId": ["203"]
+        },
+        {
+          "name": "GA4 - Event - Resultado Gerado",
+          "type": "gaawe",
+          "parameter": [
+            { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+            { "type": "TEMPLATE", "key": "eventName", "value": "resultado_gerado" }
+          ],
+          "firingTriggerId": ["204"]
+        },
+        {
+          "name": "GA4 - Event - Lead Qualificado",
+          "type": "gaawe",
+          "parameter": [
+            { "type": "BOOLEAN", "key": "sendEcommerceData", "value": "false" },
+            { "type": "TEMPLATE", "key": "eventName", "value": "lead_qualificado" }
+          ],
+          "firingTriggerId": ["205"]
+        }
+      ],
+      "trigger": [
+        {
+          "triggerId": "201",
+          "name": "Trigger - Quiz Start",
+          "type": "CUSTOM_EVENT",
+          "customEventFilter": [
+            {
+              "type": "MATCH_REGEX",
+              "parameter": [
+                { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+                { "type": "TEMPLATE", "key": "arg1", "value": "^(quiz_start|quiz start|Quiz_Start)$" }
+              ]
+            }
+          ]
+        },
+        {
+          "triggerId": "202",
+          "name": "Trigger - Formulario Aberto",
+          "type": "CUSTOM_EVENT",
+          "customEventFilter": [
+            {
+              "type": "MATCH_REGEX",
+              "parameter": [
+                { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+                { "type": "TEMPLATE", "key": "arg1", "value": "^(formulario_aberto|formulario aberto|Formulario_Aberto)$" }
+              ]
+            }
+          ]
+        },
+        {
+          "triggerId": "203",
+          "name": "Trigger - Cadastro",
+          "type": "CUSTOM_EVENT",
+          "customEventFilter": [
+            {
+              "type": "MATCH_REGEX",
+              "parameter": [
+                { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+                { "type": "TEMPLATE", "key": "arg1", "value": "^(cadastro|lead|Cadastro)$" }
+              ]
+            }
+          ]
+        },
+        {
+          "triggerId": "204",
+          "name": "Trigger - Resultado Gerado",
+          "type": "CUSTOM_EVENT",
+          "customEventFilter": [
+            {
+              "type": "MATCH_REGEX",
+              "parameter": [
+                { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+                { "type": "TEMPLATE", "key": "arg1", "value": "^(resultado_gerado|resultado gerado|Resultado_Gerado)$" }
+              ]
+            }
+          ]
+        },
+        {
+          "triggerId": "205",
+          "name": "Trigger - Lead Qualificado",
+          "type": "CUSTOM_EVENT",
+          "customEventFilter": [
+            {
+              "type": "MATCH_REGEX",
+              "parameter": [
+                { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+                { "type": "TEMPLATE", "key": "arg1", "value": "^(lead_qualificado|lead qualificado|Lead_Qualificado_LST)$" }
+              ]
+            }
+          ]
+        },
+        {
+          "triggerId": "206",
+          "name": "Trigger - Lead Desqualificado",
+          "type": "CUSTOM_EVENT",
+          "customEventFilter": [
+            {
+              "type": "MATCH_REGEX",
+              "parameter": [
+                { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+                { "type": "TEMPLATE", "key": "arg1", "value": "^(lead_desqualificado|lead desqualificado|Lead_Desqualificado_LST)$" }
+              ]
+            }
+          ]
+        }
+      ],
+      "variable": [
+        {
+          "name": "dlv - score",
+          "type": "v",
+          "parameter": [
+            { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+            { "type": "TEMPLATE", "key": "name", "value": "score" }
+          ]
+        },
+        {
+          "name": "dlv - qualificado",
+          "type": "v",
+          "parameter": [
+            { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+            { "type": "TEMPLATE", "key": "name", "value": "qualificado" }
+          ]
+        },
+        {
+          "name": "dlv - utm_source",
+          "type": "v",
+          "parameter": [
+            { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+            { "type": "TEMPLATE", "key": "name", "value": "utms.utm_source" }
+          ]
+        },
+        {
+          "name": "dlv - utm_campaign",
+          "type": "v",
+          "parameter": [
+            { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+            { "type": "TEMPLATE", "key": "name", "value": "utms.utm_campaign" }
+          ]
+        },
+        {
+          "name": "dlv - utm_medium",
+          "type": "v",
+          "parameter": [
+            { "type": "INTEGER", "key": "dataLayerVersion", "value": "2" },
+            { "type": "TEMPLATE", "key": "name", "value": "utms.utm_medium" }
+          ]
+        }
+      ]
+    }
+  };
+
+  const blob = new Blob([JSON.stringify(container, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "gtm_container_" + brand.toLowerCase() + "_v5_1_1.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  if (typeof showToast === 'function') showToast("✅ Container Oficial GTM (.json) gerado com sucesso!");
+}
+
 function syncTrackingInputs() {
   if (!currentConfig.tracking) currentConfig.tracking = {};
   currentConfig.tracking.metaPixelId = (document.getElementById('cfg-tracking-meta-pixel')?.value || '').trim();
@@ -10036,6 +10304,10 @@ function syncTrackingInputs() {
   currentConfig.tracking.captureUtms = !!document.getElementById('cfg-tracking-utms')?.checked;
   currentConfig.tracking.trackQualifiedEvent = (document.getElementById('cfg-tracking-ev-qual')?.value || '').trim() || 'Lead_Qualificado_LST';
   currentConfig.tracking.trackDisqualifiedEvent = (document.getElementById('cfg-tracking-ev-desqual')?.value || '').trim() || 'Lead_Desqualificado_LST';
+  currentConfig.tracking.trackQuizStartEvent = (document.getElementById('cfg-tracking-ev-quiz-start')?.value || '').trim() || 'quiz_start';
+  currentConfig.tracking.trackFormOpenEvent = (document.getElementById('cfg-tracking-ev-form-open')?.value || '').trim() || 'formulario_aberto';
+  currentConfig.tracking.trackCadastroEvent = (document.getElementById('cfg-tracking-ev-cadastro')?.value || '').trim() || 'cadastro';
+  currentConfig.tracking.trackResultEvent = (document.getElementById('cfg-tracking-ev-result')?.value || '').trim() || 'resultado_gerado';
   syncDestinationInputs();
   refreshPreview();
 }
@@ -12597,7 +12869,7 @@ function buildFullWorkspaceBundle() {
     version: "5.1",
     type: "lst_full_workspace_backup",
     exportedAt: new Date().toISOString(),
-    system: "LST Studio v5.1 (FNW Ecosystem)",
+    system: "LST Studio v5.1.3 (FNW Ecosystem)",
     activeModelId: currentActiveModelId || 'native_fnw',
     activeConfig: JSON.parse(JSON.stringify(currentConfig)),
     galleryModels: allModels,
@@ -18145,6 +18417,10 @@ input:focus, select:focus {
 </style>
 </head>
 <body>
+${trk.gtmId ? `<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${trk.gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+` : ''}
 <div class="card-main">
   
   <!-- CABEÇALHO DA MARCA / LOGO COM PADDING DINÂMICO & NOTCH SAFE AREA -->
@@ -18507,6 +18783,13 @@ window.renderResultScreen = function(score, customData) {
   if (loading) loading.style.display = 'none';
   window.showScreen('screen-result');
 
+  // Disparo de Evento: resultado_gerado
+  var resEv = '${(config.tracking && config.tracking.trackResultEvent) || "resultado_gerado"}';
+  dispatchTrackingEvent(resEv, {
+    score: totalScore,
+    qualificado: totalScore >= minScore
+  }, ['resultado_gerado', 'resultado gerado', 'Resultado_Gerado', 'quiz_result']);
+
   const scoreEl = document.getElementById('score-value');
   if (scoreEl) scoreEl.innerText = totalScore;
 
@@ -18663,10 +18946,76 @@ function handleQuestionOtherInput(step, optIdx, val) {
   }
 }
 
+// ==========================================
+// CENTRAL DE TRACKING & DISPARO DE EVENTOS (GTM, GA4, META, TIKTOK)
+// ==========================================
+function dispatchTrackingEvent(eventName, payload, altNames) {
+  try {
+    var utms = (typeof getUrlUtms === 'function') ? getUrlUtms() : {};
+    var baseData = Object.assign({
+      event: eventName,
+      event_name: eventName,
+      quiz_name: '${escapedBrand}',
+      utms: utms,
+      timestamp: new Date().toISOString()
+    }, payload || {});
+
+    // 1. Google Tag Manager (window.dataLayer)
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(baseData);
+
+    // Nomes alternativos para compatibilidade máxima com triggers no GTM (espaços, hífens, minúsculas)
+    if (Array.isArray(altNames)) {
+      altNames.forEach(function(alt) {
+        if (alt && alt !== eventName) {
+          var altData = Object.assign({}, baseData, { event: alt, event_name: alt });
+          window.dataLayer.push(altData);
+        }
+      });
+    }
+
+    // 2. Google Analytics 4 (gtag)
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, baseData);
+    }
+
+    // 3. Meta Pixel (Facebook / Instagram Ads)
+    if (typeof window.fbq === 'function') {
+      window.fbq('trackCustom', eventName, baseData);
+      if (eventName === 'cadastro' || eventName === 'lead_qualificado' || eventName === '${(config.tracking && config.tracking.trackQualifiedEvent) || "Lead_Qualificado_LST"}') {
+        window.fbq('track', 'Lead', {
+          content_name: '${escapedBrand}',
+          value: (payload && payload.score) ? payload.score : 1,
+          currency: 'BRL'
+        });
+      }
+    }
+
+    // 4. TikTok Pixel
+    if (typeof window.ttq === 'object' && typeof window.ttq.track === 'function') {
+      if (eventName === 'quiz_start') {
+        window.ttq.track('ViewContent', { content_name: '${escapedBrand}' });
+      } else if (eventName === 'formulario_aberto') {
+        window.ttq.track('InitiateCheckout', { content_name: '${escapedBrand}' });
+      } else if (eventName === 'cadastro' || eventName === 'lead_qualificado') {
+        window.ttq.track('SubmitForm', { content_name: '${escapedBrand}', value: (payload && payload.score) ? payload.score : 0 });
+      }
+    }
+
+    console.log("📊 [Tracking LST v5.1.3] Evento disparado com sucesso:", eventName, baseData);
+  } catch(err) {
+    console.warn("Aviso no tracking do LST:", err);
+  }
+}
+
 function startQuiz() {
   currentStep = 0; userScores = [];
   window.showScreen('screen-quiz');
   renderQuestion();
+
+  // Disparo de Evento: quiz_start
+  var startEv = '${(config.tracking && config.tracking.trackQuizStartEvent) || "quiz_start"}';
+  dispatchTrackingEvent(startEv, { step: 1 }, ['quiz_start', 'quiz start', 'Quiz_Start', 'quiz-start']);
 }
 
 function renderQuestion() {
@@ -18744,6 +19093,10 @@ function nextQuestion() {
     renderQuestion(); 
   } else { 
     window.showScreen('screen-lead'); 
+
+    // Disparo de Evento: formulario_aberto
+    var formEv = '${(config.tracking && config.tracking.trackFormOpenEvent) || "formulario_aberto"}';
+    dispatchTrackingEvent(formEv, { questions_count: questions.length }, ['formulario_aberto', 'formulario aberto', 'Formulario_Aberto', 'form_open']);
   }
 }
 function prevQuestion() { 
@@ -18988,21 +19341,35 @@ function generateResult(e) {
   }
   var pageUtms = getUrlUtms();
 
-  // Disparo de Eventos nos Pixels de Anúncios (Meta, GTM, TikTok)
+  // Disparo de Eventos de Conversão (GTM, GA4, Meta, TikTok)
   try {
+    // 1. Evento de Cadastro Concluído (Formulário Enviado)
+    var cadEv = '${(config.tracking && config.tracking.trackCadastroEvent) || "cadastro"}';
+    dispatchTrackingEvent(cadEv, {
+      score: totalScore,
+      qualificado: isQual,
+      status_qualificacao: hasKnockout ? 'DESQUALIFICADO_KNOCKOUT' : (isQual ? 'QUALIFICADO' : 'DESQUALIFICADO'),
+      segmento: tipo,
+      faturamento: faturamento,
+      cidade: localizacao
+    }, ['cadastro', 'lead', 'Cadastro', 'generate_lead']);
+
+    // 2. Evento Específico de Qualificação / Desqualificação
     var evName = isQual ? '${(config.tracking && config.tracking.trackQualifiedEvent) || "Lead_Qualificado_LST"}' : '${(config.tracking && config.tracking.trackDisqualifiedEvent) || "Lead_Desqualificado_LST"}';
-    if (typeof window.fbq === 'function') {
-      window.fbq('trackCustom', evName, { score: totalScore, qualificado: isQual });
-      if (isQual) window.fbq('track', 'Lead', { value: totalScore, currency: 'BRL' });
-    }
-    if (window.dataLayer && Array.isArray(window.dataLayer)) {
-      window.dataLayer.push({ event: evName, score: totalScore, qualificado: isQual, utms: pageUtms });
-    }
-    if (typeof window.ttq === 'object' && typeof window.ttq.track === 'function') {
-      window.ttq.track(isQual ? 'SubmitForm' : 'ClickButton', { score: totalScore });
-    }
+    var qualAlts = isQual 
+      ? ['lead_qualificado', 'lead qualificado', 'Lead_Qualificado_LST', 'LeadQualificado']
+      : ['lead_desqualificado', 'lead desqualificado', 'Lead_Desqualificado_LST', 'LeadDesqualificado'];
+
+    dispatchTrackingEvent(evName, {
+      score: totalScore,
+      qualificado: isQual,
+      hasKnockout: hasKnockout,
+      motivoKnockout: knockoutMotivo || null,
+      segmento: tipo,
+      faturamento: faturamento
+    }, qualAlts);
   } catch(e) {
-    console.warn("Erro ao disparar eventos nos pixels:", e);
+    console.warn("Erro ao disparar eventos de conversão:", e);
   }
 
   // Disparo Paralelo Multi-Planilhas / Multi-Webhooks em background
@@ -20058,7 +20425,7 @@ function saveNetlifyTokenFromModal() {
         <div class="flex items-center justify-center gap-2">
           <span class="text-2xl font-black text-white tracking-tight leading-none">LST</span>
           <span class="text-2xl font-black text-blue-400 tracking-tight leading-none">Studio</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono bg-blue-500/20 text-blue-400 border border-blue-500/40 shadow-sm">v5.1</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono bg-blue-500/20 text-blue-400 border border-blue-500/40 shadow-sm">v5.1.3</span>
         </div>
         <p class="text-neutral-300 text-xs mt-1.5 font-semibold">Autenticação &amp; Gestão de Acesso</p>
       </div>
@@ -20230,7 +20597,7 @@ function saveNetlifyTokenFromModal() {
           <div>
             <div class="flex items-center gap-2">
               <h3 class="text-base font-black uppercase tracking-wide">Central de Publicação &amp; Links LST</h3>
-              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded font-mono border" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); color: var(--theme-c1, #3b82f6); border-color: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.35);">v5.1 Live</span>
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded font-mono border" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); color: var(--theme-c1, #3b82f6); border-color: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.35);">v5.1.3 Live</span>
             </div>
             <p class="text-xs mt-0.5" style="color: var(--text-muted, #94a3b8);">Aprenda a colocar seu qualificador no ar em 1 minuto ou integrá-lo em qualquer site.</p>
           </div>
