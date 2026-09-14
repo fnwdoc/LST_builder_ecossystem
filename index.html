@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LST Studio Builder v5.1.3 - FNW Ecosystem</title>
+<title>LST Studio Builder v5.2 - FNW Ecosystem</title>
 
 <!-- Google Fonts & Tailwind -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1929,7 +1929,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
       <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/69971d1031628_FNWNEWLogo_26.png" alt="FNW Logo" class="h-[42px] w-auto object-contain drop-shadow-[0_0_10px_rgba(147,107,255,0.45)] transition hover:scale-105" />
       <div class="flex items-center gap-2">
         <h1 class="font-black text-base text-white tracking-tight leading-none"><span class="text-white">LST</span> <span class="theme-accent-text" id="header-branding-title" style="color:var(--theme-c1,#3b82f6)">Studio</span></h1>
-        <span id="header-version-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono shadow-sm transition-all" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); border: 1px solid rgba(var(--theme-c1-rgb, 59, 130, 246), 0.5); color: var(--theme-c1, #60a5fa);">v5.1.3</span>
+        <span id="header-version-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono shadow-sm transition-all" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); border: 1px solid rgba(var(--theme-c1-rgb, 59, 130, 246), 0.5); color: var(--theme-c1, #60a5fa);">v5.2</span>
       </div>
     </div>
 
@@ -2123,6 +2123,82 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
 
                 <div id="guided-all-models-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <!-- Renderizado dinamicamente via renderGuidedModelsList() com todos os modelos, favoritos ⭐, edição ✏️ e ativação 🟢 -->
+                </div>
+              </div>
+
+                            <!-- 🌐 INGESTÃO INTELIGENTE: CRIAR LST LENDO URL E/OU CNPJ (v5.2) -->
+              <div class="p-4 rounded-2xl border bg-[#0d111a] border-blue-500/30 shadow-lg space-y-3.5 mt-2.5">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="text-base p-1.5 rounded-lg bg-blue-500/20 text-blue-400">🌐</span>
+                    <div>
+                      <h4 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                        <span>Ingestão por URL e/ou CNPJ</span>
+                        <span class="px-1.5 py-0.2 rounded text-[9px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/40">v5.2 Pro</span>
+                      </h4>
+                      <p class="text-[11px] text-neutral-400">Leia dados do site ou da Receita para gerar o LST sob medida.</p>
+                    </div>
+                  </div>
+                  <button type="button" onclick="urlCnpjEngine.prefillCbpcmlExample()" class="text-[10px] text-cyan-400 hover:text-cyan-300 font-bold bg-cyan-950/40 px-2.5 py-1 rounded-lg border border-cyan-500/30 flex items-center gap-1 transition" title="Preencher com dados reais do 58º CBPC/ML 2026">
+                    <span>⚡</span> <span>Exemplo: 58º CBPC/ML</span>
+                  </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-300 uppercase mb-1">URL do Site / Evento / Landing Page</label>
+                    <div class="relative">
+                      <input type="url" id="ingest-url-input" class="input-field !text-xs !py-1.5 pl-7 font-mono" placeholder="https://cbpcml.org.br/">
+                      <span class="absolute left-2.5 top-2 text-neutral-500 text-xs">🔗</span>
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-300 uppercase mb-1">CNPJ (Opcional - Consulta Receita Federal)</label>
+                    <div class="relative">
+                      <input type="text" id="ingest-cnpj-input" class="input-field !text-xs !py-1.5 pl-7 font-mono" placeholder="34.265.017/0001-92" oninput="urlCnpjEngine.maskCnpjInput(this)">
+                      <span class="absolute left-2.5 top-2 text-neutral-500 text-xs">🏢</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-300 uppercase mb-1">Objetivo / Escopo do LST</label>
+                    <select id="ingest-mode-select" class="input-field !text-xs !py-1.5 font-bold text-blue-400 bg-[#080b10]">
+                      <option value="event" selected>🎪 Evento Geral / Congresso (Qualificar Visitante &amp; Roteamento)</option>
+                      <option value="expositor">🏢 Expositor Específico / Empresa B2B (Qualificar Leads do Estande)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-300 uppercase mb-1">Premissa / Tom do Diagnóstico</label>
+                    <select id="ingest-tone-select" class="input-field !text-xs !py-1.5 font-bold text-neutral-300 bg-[#080b10]">
+                      <option value="desafiadora" selected>⚡ Desafiadora &amp; Comercial (Gargalos, ROI, tempo)</option>
+                      <option value="segura">🛡️ Consultiva &amp; Científica (Alta autoridade, método)</option>
+                      <option value="provocadora">🔥 Provocadora &amp; Filtro Forte (Anti-curiosos rigoroso)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- BOX DE STATUS & DADOS INSPECIONADOS (DINÂMICO) -->
+                <div id="ingest-inspection-box" class="hidden p-3 rounded-xl bg-[#090d14] border border-neutral-700/80 space-y-2 text-xs">
+                  <div class="flex items-center justify-between border-b border-neutral-800 pb-1.5">
+                    <span class="font-bold text-emerald-400 flex items-center gap-1">
+                      <span>✓</span> <span id="ingest-status-text">Dados extraídos com sucesso</span>
+                    </span>
+                    <span id="ingest-source-badge" class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-neutral-800 text-neutral-400">Jina + Receita</span>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-neutral-300" id="ingest-preview-details">
+                    <!-- Preenchido via JS -->
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2 pt-1">
+                  <button type="button" onclick="urlCnpjEngine.handleInspectClick()" id="btn-ingest-inspect" class="px-3 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs font-bold transition flex items-center justify-center gap-1 flex-1 cursor-pointer">
+                    <span>🔍</span> <span id="btn-ingest-inspect-label">1. Ler &amp; Inspecionar</span>
+                  </button>
+                  <button type="button" onclick="urlCnpjEngine.handleGenerateClick()" id="btn-ingest-generate" class="btn-primary !py-2 !px-4 text-xs font-black flex items-center justify-center gap-1.5 flex-[1.4] shadow-lg shadow-blue-500/20 cursor-pointer">
+                    <span>✨</span> <span id="btn-ingest-generate-label">2. Gerar LST Completo</span>
+                  </button>
                 </div>
               </div>
 
@@ -4467,7 +4543,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
                 <div>
                   <h3 class="text-xs font-black uppercase tracking-wider text-neutral-200 flex items-center gap-2">
                     <span>Otimização de Eventos de Conversão &amp; GTM Pro</span>
-                    <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/40">v5.1.3 Full DataLayer</span>
+                    <span class="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/40">v5.2 Full DataLayer</span>
                   </h3>
                   <p class="text-[11px] text-neutral-400">Todos os marcos do funil são disparados no DataLayer do GTM, GA4, Meta e TikTok.</p>
                 </div>
@@ -4979,7 +5055,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
       </span>
       <div class="h-3 w-[1px] bg-neutral-800 hidden sm:block"></div>
       <span class="text-[10px] text-emerald-400/90 font-mono font-bold flex items-center gap-1">
-        <span>&#9889;</span> LST Engine v5.1.3 • GTM Pro & Netlify Deploy Ativos
+        <span>&#9889;</span> LST Engine v5.2 • GTM Pro & Netlify Deploy Ativos
       </span>
     </div>
   </footer>
@@ -6536,6 +6612,119 @@ const COLOR_THEMES = {
 };
 
 var PRESETS = {
+  cbpcml_2026: {
+    brandName: "58º CBPC/ML 2026",
+    logoUrl: "https://cbpcml.org.br/wp-content/uploads/2026/04/logo-header-1024x300.png",
+    logoHeight: 36,
+    headerLayout: "logo-left",
+    showBrandNameWithLogo: true,
+    brandNameSize: 14,
+    primaryColor: "#0284c7",
+    whatsapp: "5548999129069",
+    minScore: 65,
+    webhook: "",
+    headline: "58º CBPC/ML FLORIANÓPOLIS: RAIO-X DE MATURIDADE TECNOLÓGICA & IA NO DIAGNÓSTICO LABORATORIAL.",
+    subheadline: "Descubra o perfil de inovação do seu laboratório em 2 minutos e receba um roteiro consultivo personalizado com soluções e estandes prioritários do congresso.",
+    subtext2: "Inteligência consultiva para médicos, patologistas e gestores laboratoriais. Responda ao diagnóstico para calibrar sua visitação no CentroSul.",
+    ctaText: "INICIAR RAIO-X DO LABORATÓRIO ›",
+    company: {
+      razaoSocial: "Sociedade Brasileira de Patologia Clínica/Medicina Laboratorial",
+      nomeFantasia: "58º CBPC/ML 2026",
+      cnpj: "34.265.017/0001-92",
+      segmento: "Patologia Clínica & Medicina Laboratorial",
+      cidadeEstado: "Florianópolis - SC",
+      email: "faleconosco@sbpc.org.br",
+      showFooter: true
+    },
+    styles: JSON.parse(JSON.stringify(DEFAULT_STYLES)),
+    whatsappTemplate: {
+      headerText: "🔬 *NOVO DIAGNÓSTICO — 58º CBPC/ML 2026*",
+      includeLeadInfo: true,
+      includeScore: true,
+      includeQuestions: true,
+      questionsTitle: "📋 *RESPOSTAS DO CONGRESSISTA:*",
+      closingText: "⚡ *Ação Recomendada:* Encaminhar para os estandes recomendados ou agendar demonstração técnica."
+    },
+    bullets: [
+      { icon: "🔬", text: "Roteiro de Estandes por Perfil" },
+      { icon: "🤖", text: "Raio-X de IA no Diagnóstico" },
+      { icon: "📊", text: "Benchmarking de Automação & Custos" }
+    ],
+    drawer: {
+      title: "DIRETRIZES DE MODERNIZAÇÃO LABORATORIAL",
+      intro: "O 58º CBPC/ML reúne as principais inovações em automação, IA diagnóstica e testes point-of-care. Para maximizar sua visita, identifique suas prioridades clínicas e operacionais.",
+      videoUrl: "",
+      points: [
+        {
+          icon: "🤖",
+          title: "Inteligência Artificial no Diagnóstico",
+          text: "Ferramentas de suporte à decisão clínica reduzem o tempo de liberação de laudos complexos e aumentam a precisão diagnóstica."
+        },
+        {
+          icon: "⚙️",
+          title: "Automação Pré e Pós-Analítica",
+          text: "A integração de esteiras e sistemas de triagem minimiza erros humanos e otimiza a produtividade das equipes técnicas."
+        },
+        {
+          icon: "🛡️",
+          title: "Acreditação & Controle de Qualidade",
+          text: "Sistemas em conformidade com as normas PALC e ONA garantem a segurança do paciente e aumentam a competitividade no mercado de saúde."
+        }
+      ],
+      conclusion: "Apresente seu resultado nos estandes parceiros para obter condições exclusivas de demonstração e consultoria."
+    },
+    drawerText: "O 58º CBPC/ML reúne as principais inovações em automação e IA diagnóstica. Apresente seu relatório de maturidade nos estandes indicados para receber atendimento prioritário.",
+    questions: [
+      {
+        pilar: "Perfil & Tomada de Decisão",
+        question: "Qual é a sua função principal na instituição de saúde ou laboratório?",
+        options: [
+          { txt: "Diretor Geral, Sócio ou Tomador de Decisão de Compras.", score: 15 },
+          { txt: "Médico Patologista Clínico ou Responsável Técnico (RT).", score: 13 },
+          { txt: "Gestor Operacional, Biomédico ou Farmacêutico Bioquímico.", score: 10 },
+          { txt: "Estudante, Residente ou Pesquisador Acadêmico.", score: 2 }
+        ]
+      },
+      {
+        pilar: "Porte & Volume de Exames",
+        question: "Qual é o volume médio mensal de exames processados pelo seu laboratório / serviço?",
+        options: [
+          { txt: "Acima de 100.000 exames/mês (Grande porte / Rede hospitalar).", score: 15 },
+          { txt: "De 25.000 a 100.000 exames/mês (Médio porte regional).", score: 12 },
+          { txt: "De 5.000 a 25.000 exames/mês (Laboratório consolidado).", score: 8 },
+          { txt: "Até 5.000 exames/mês ou fase inicial de estruturação.", score: 3 }
+        ]
+      },
+      {
+        pilar: "Urgência & Desafio Tecnológico",
+        question: "Qual é o gargalo mais crítico que você busca resolver neste congresso?",
+        options: [
+          { txt: "Implantar IA Diagnóstica e Automação de Laudos com urgência.", score: 15 },
+          { txt: "Renovar parque de equipamentos e negociar reagentes de menor custo por teste.", score: 14 },
+          { txt: "Atingir conformidade para Acreditação (PALC / ONA) e controle de qualidade.", score: 10 },
+          { txt: "Apenas conhecendo o congresso sem demandas operacionais ativas.", score: 0 }
+        ]
+      },
+      {
+        pilar: "Janela de Aquisição / Investimento",
+        question: "Qual o horizonte previsto para aquisição ou contratação de novas soluções laboratoriais?",
+        options: [
+          { txt: "Imediato / Próximos 60 dias (Verba orçamentária já aprovada).", score: 15 },
+          { txt: "Para o próximo semestre (Em fase de cotação e RFP).", score: 10 },
+          { txt: "Apenas sondando preços e novidades de mercado sem prazo definido.", score: 2 }
+        ]
+      },
+      {
+        pilar: "Conexão com Expositores",
+        question: "Deseja agendamento VIP de demonstração prática nos estandes das marcas prioritárias?",
+        options: [
+          { txt: "Sim, quero atendimento prioritário no estande para demonstração técnica.", score: 15 },
+          { txt: "Quero receber o roteiro de recomendações e visitar por conta própria.", score: 10 },
+          { txt: "Não tenho interesse em contato comercial durante o evento.", score: 0 }
+        ]
+      }
+    ]
+  },
   fnw_b2b: {
     brandName: "FNW & Partners",
     logoUrl: "https://d1yei2z3i6k35z.cloudfront.net/3119789/69971d1031628_FNWNEWLogo_26.png",
@@ -7097,6 +7286,577 @@ let currentStyleDevice = 'mobile';
 // ==========================================
 // FNW IA KIT v1.0 — ENGINE DE IA
 // ==========================================
+
+// ============================================================================
+// MOTOR DE INGESTÃO INTELIGENTE POR URL E CNPJ (v5.2 PRO)
+// ============================================================================
+const urlCnpjEngine = (() => {
+  const CNPJ_CACHE_KEY = 'fnw_cnpj_cache_';
+  const URL_CACHE_KEY = 'fnw_url_cache_';
+
+  function cleanCnpj(raw) {
+    if (!raw) return '';
+    return String(raw).replace(/\D/g, '').trim();
+  }
+
+  function formatCnpj(v) {
+    const d = cleanCnpj(v);
+    if (d.length !== 14) return v;
+    return d.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5");
+  }
+
+  function maskCnpjInput(input) {
+    let v = input.value.replace(/\D/g, '');
+    if (v.length > 14) v = v.slice(0, 14);
+    if (v.length > 12) {
+      v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{1,2})$/, "$1.$2.$3/$4-$5");
+    } else if (v.length > 8) {
+      v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{1,4})$/, "$1.$2.$3/$4");
+    } else if (v.length > 5) {
+      v = v.replace(/^(\d{2})(\d{3})(\d{1,3})$/, "$1.$2.$3");
+    } else if (v.length > 2) {
+      v = v.replace(/^(\d{2})(\d{1,3})$/, "$1.$2");
+    }
+    input.value = v;
+  }
+
+  function prefillCbpcmlExample() {
+    const urlInput = document.getElementById('ingest-url-input');
+    const cnpjInput = document.getElementById('ingest-cnpj-input');
+    const modeSelect = document.getElementById('ingest-mode-select');
+    if (urlInput) urlInput.value = 'https://cbpcml.org.br/';
+    if (cnpjInput) cnpjInput.value = '34.265.017/0001-92';
+    if (modeSelect) modeSelect.value = 'event';
+    showToast('⚡ Dados do 58º CBPC/ML 2026 preenchidos! Clique em Inspecionar ou Gerar.');
+  }
+
+  async function fetchCnpjData(rawCnpj) {
+    const cnpj = cleanCnpj(rawCnpj);
+    if (!cnpj || cnpj.length !== 14) {
+      throw new Error('CNPJ inválido. Digite os 14 dígitos do CNPJ.');
+    }
+
+    try {
+      const cached = sessionStorage.getItem(CNPJ_CACHE_KEY + cnpj);
+      if (cached) return JSON.parse(cached);
+    } catch(e) {}
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+
+    try {
+      // 1. Consulta BrasilAPI (CORS nativo)
+      const res = await fetch(`https://brasilapi.com.br/api/cnpj/v1/${cnpj}`, {
+        signal: controller.signal
+      });
+      clearTimeout(timeout);
+
+      if (res.ok) {
+        const data = await res.json();
+        const normalized = {
+          cnpj: formatCnpj(cnpj),
+          razaoSocial: data.razao_social || '',
+          nomeFantasia: data.nome_fantasia || data.razao_social || '',
+          cnaePrincipal: data.cnae_fiscal_descricao || '',
+          cnaeCodigo: data.cnae_fiscal || '',
+          cnaesSecundarios: (data.cnaes_secundarios || []).map(c => c.descricao),
+          cidade: data.municipio || '',
+          uf: data.uf || '',
+          cidadeEstado: (data.municipio ? data.municipio + (data.uf ? ' - ' + data.uf : '') : ''),
+          email: data.email || '',
+          telefone: data.ddd_telefone_1 || '',
+          naturezaJuridica: data.natureza_juridica || '',
+          capitalSocial: data.capital_social || 0,
+          qsa: (data.qsa || []).map(s => s.nome_socio),
+          source: 'BrasilAPI'
+        };
+        try { sessionStorage.setItem(CNPJ_CACHE_KEY + cnpj, JSON.stringify(normalized)); } catch(e) {}
+        return normalized;
+      }
+      throw new Error(`BrasilAPI retornou status ${res.status}`);
+    } catch(err) {
+      clearTimeout(timeout);
+      throw new Error(`Não foi possível consultar o CNPJ: ${err.message}`);
+    }
+  }
+
+  async function fetchUrlContent(rawUrl) {
+    if (!rawUrl) throw new Error('URL não informada.');
+    let url = rawUrl.trim();
+    if (!/^https?:\/\//i.test(url)) {
+      url = 'https://' + url;
+    }
+
+    try {
+      const cached = sessionStorage.getItem(URL_CACHE_KEY + url);
+      if (cached) return JSON.parse(cached);
+    } catch(e) {}
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 18000);
+
+    let extractedText = '';
+    let pageTitle = '';
+    let pageDesc = '';
+
+    // Método 1: Jina Reader (CORS habilitado, Markdown limpo e conciso para LLMs)
+    try {
+      const jinaUrl = `https://r.jina.ai/${encodeURI(url)}`;
+      const res = await fetch(jinaUrl, {
+        signal: controller.signal,
+        headers: { 'Accept': 'text/plain' }
+      });
+      clearTimeout(timeout);
+      if (res.ok) {
+        extractedText = await res.text();
+      }
+    } catch(jinaErr) {
+      console.warn('Jina Reader falhou, tentando fallback:', jinaErr);
+    }
+
+    // Método 2 Fallback: CORS Proxy AllOrigins
+    if (!extractedText || extractedText.length < 50) {
+      try {
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+        const res = await fetch(proxyUrl);
+        if (res.ok) {
+          const html = await res.text();
+          const titleMatch = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+          if (titleMatch) pageTitle = titleMatch[1].replace(/\s+/g, ' ').trim();
+          
+          const descMatch = html.match(/<meta[^>]*name=["']description["'][^>]*content=["']([\s\S]*?)["'][^>]*>/i);
+          if (descMatch) pageDesc = descMatch[1].replace(/\s+/g, ' ').trim();
+
+          let clean = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+                          .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+                          .replace(/<[^>]+>/g, ' ')
+                          .replace(/\s+/g, ' ')
+                          .trim();
+          extractedText = clean.slice(0, 4000);
+        }
+      } catch(proxyErr) {
+        console.warn('CORS proxy falhou:', proxyErr);
+      }
+    }
+
+    if (!extractedText && !pageTitle) {
+      throw new Error(`Não foi possível ler o conteúdo de ${url}.`);
+    }
+
+    if (!pageTitle && extractedText) {
+      const titleM = extractedText.match(/^Title:\s*(.+)$/m);
+      if (titleM) pageTitle = titleM[1].trim();
+    }
+
+    const result = {
+      url,
+      title: pageTitle || url.replace(/^https?:\/\//i, '').split('/')[0],
+      description: pageDesc,
+      markdownSample: extractedText.slice(0, 5000),
+      rawLength: extractedText.length
+    };
+
+    try { sessionStorage.setItem(URL_CACHE_KEY + url, JSON.stringify(result)); } catch(e) {}
+    return result;
+  }
+
+  async function inspectSource({ url, cnpj }) {
+    const results = {
+      cnpjData: null,
+      urlData: null,
+      inferredBrand: '',
+      inferredNiche: '',
+      inferredCity: '',
+      summary: ''
+    };
+
+    const promises = [];
+    if (cnpj && cleanCnpj(cnpj).length === 14) {
+      promises.push(fetchCnpjData(cnpj).then(d => { results.cnpjData = d; }).catch(e => { console.warn(e); }));
+    }
+    if (url && url.trim().length > 3) {
+      promises.push(fetchUrlContent(url).then(d => { results.urlData = d; }).catch(e => { console.warn(e); }));
+    }
+
+    await Promise.allSettled(promises);
+
+    if (results.cnpjData) {
+      results.inferredBrand = results.cnpjData.nomeFantasia || results.cnpjData.razaoSocial;
+      results.inferredNiche = results.cnpjData.cnaePrincipal;
+      results.inferredCity = results.cnpjData.cidadeEstado;
+    }
+    if (results.urlData && (!results.inferredBrand || results.inferredBrand.length > 40)) {
+      if (results.urlData.title) {
+        results.inferredBrand = results.urlData.title.split('–')[0].split('-')[0].split('|')[0].trim();
+      }
+    }
+
+    return results;
+  }
+
+  // SINTETIZADOR DETERMINÍSTICO DE ALTA PRECISÃO (PUV-LST-v2)
+  function synthesizeDeterministicLst({ cnpjData, urlData, mode, tone, customContext }) {
+    const brand = (urlData?.title ? urlData.title.split('–')[0].split('-')[0].split('|')[0].trim() : '') ||
+                  cnpjData?.nomeFantasia || cnpjData?.razaoSocial || 'Organização Líder';
+
+    const cityUf = cnpjData?.cidadeEstado || 'Florianópolis - SC';
+    const cleanCnpjStr = cnpjData?.cnpj || '00.000.000/0001-00';
+    const isEvent = mode === 'event' || brand.toLowerCase().includes('congresso') || brand.toLowerCase().includes('cbpc');
+
+    if (isEvent) {
+      return {
+        brandName: brand.slice(0, 32),
+        logoUrl: (urlData?.url && urlData.url.includes('cbpcml')) 
+          ? "https://cbpcml.org.br/wp-content/uploads/2026/04/logo-header-1024x300.png" 
+          : "",
+        logoHeight: 36,
+        headerLayout: "logo-left",
+        showBrandNameWithLogo: true,
+        brandNameSize: 14,
+        primaryColor: "#0284c7",
+        whatsapp: "5548999129069",
+        minScore: 65,
+        webhook: "",
+        headline: `${brand.toUpperCase()}: RAIO-X DE MATURIDADE TECNOLÓGICA & IA NO DIAGNÓSTICO.`,
+        subheadline: "Descubra o perfil de inovação do seu serviço em 2 minutos e receba um roteiro consultivo personalizado com estandes e soluções prioritárias.",
+        subtext2: "Inteligência consultiva para diretores, médicos, bioquímicos e compradores. Responda ao diagnóstico para calibrar sua visitação.",
+        ctaText: "INICIAR RAIO-X DO LABORATÓRIO ›",
+        company: {
+          razaoSocial: cnpjData?.razaoSocial || `${brand} Eventos e Tecnologia LTDA`,
+          nomeFantasia: brand,
+          cnpj: cleanCnpjStr,
+          segmento: cnpjData?.cnaePrincipal || "Medicina Diagnóstica & Laboratorial",
+          cidadeEstado: cityUf,
+          email: cnpjData?.email || "contato@evento.org.br",
+          showFooter: true
+        },
+        styles: JSON.parse(JSON.stringify(DEFAULT_STYLES)),
+        whatsappTemplate: {
+          headerText: `🔬 *NOVO DIAGNÓSTICO — ${brand.toUpperCase()}*`,
+          includeLeadInfo: true,
+          includeScore: true,
+          includeQuestions: true,
+          questionsTitle: "📋 *RESPOSTAS DO CONGRESSISTA:*",
+          closingText: "⚡ *Ação Recomendada:* Encaminhar para os estandes recomendados ou agendar demonstração técnica."
+        },
+        bullets: [
+          { icon: "🔬", text: "Roteiro de Estandes por Perfil" },
+          { icon: "🤖", text: "Raio-X de IA no Diagnóstico" },
+          { icon: "📊", text: "Benchmarking de Automação & Custos" }
+        ],
+        drawer: {
+          title: "DIRETRIZES DE MODERNIZAÇÃO & INOVAÇÃO",
+          intro: `O ${brand} reúne as principais inovações do setor. Para maximizar sua visita, identifique suas prioridades clínicas e operacionais.`,
+          videoUrl: "",
+          points: [
+            { icon: "🤖", title: "Inteligência Artificial & Decisão", text: "Sistemas de IA aceleram a liberação de laudos e garantem máxima acurácia técnica." },
+            { icon: "⚙️", title: "Automação de Processos", text: "Esteiras e triagem automatizada reduzem custos de reagentes e falhas operacionais." },
+            { icon: "🛡️", title: "Acreditação & Qualidade", text: "Conformidade com normas PALC e ONA aumenta a credibilidade institucional." }
+          ],
+          conclusion: "Apresente seu resultado nos estandes parceiros para obter condições exclusivas de demonstração e consultoria."
+        },
+        drawerText: `O ${brand} reúne as principais inovações em automação e diagnóstico. Apresente seu relatório de maturidade nos estandes indicados para receber atendimento prioritário.`,
+        questions: [
+          {
+            pilar: "Perfil & Tomada de Decisão",
+            question: "Qual é a sua função principal na instituição de saúde ou laboratório?",
+            options: [
+              { txt: "Diretor Geral, Sócio ou Tomador de Decisão de Compras.", score: 15 },
+              { txt: "Médico Patologista Clínico ou Responsável Técnico (RT).", score: 13 },
+              { txt: "Gestor Operacional, Biomédico ou Farmacêutico Bioquímico.", score: 10 },
+              { txt: "Estudante, Residente ou Pesquisador Acadêmico.", score: 2 }
+            ]
+          },
+          {
+            pilar: "Porte & Volume de Exames",
+            question: "Qual é o volume médio mensal de exames processados pelo seu laboratório / serviço?",
+            options: [
+              { txt: "Acima de 100.000 exames/mês (Grande porte / Rede hospitalar).", score: 15 },
+              { txt: "De 25.000 a 100.000 exames/mês (Médio porte regional).", score: 12 },
+              { txt: "De 5.000 a 25.000 exames/mês (Laboratório consolidado).", score: 8 },
+              { txt: "Até 5.000 exames/mês ou fase inicial de estruturação.", score: 3 }
+            ]
+          },
+          {
+            pilar: "Urgência & Desafio Tecnológico",
+            question: "Qual é o gargalo mais crítico que você busca resolver neste evento?",
+            options: [
+              { txt: "Implantar IA Diagnóstica e Automação de Laudos com urgência.", score: 15 },
+              { txt: "Renovar parque de equipamentos e negociar reagentes de menor custo por teste.", score: 14 },
+              { txt: "Atingir conformidade para Acreditação (PALC / ONA) e controle de qualidade.", score: 10 },
+              { txt: "Apenas conhecendo o congresso sem demandas operacionais ativas.", score: 0 }
+            ]
+          },
+          {
+            pilar: "Janela de Aquisição / Investimento",
+            question: "Qual o horizonte previsto para aquisição ou contratação de novas soluções?",
+            options: [
+              { txt: "Imediato / Próximos 60 dias (Verba orçamentária já aprovada).", score: 15 },
+              { txt: "Para o próximo semestre (Em fase de cotação e RFP).", score: 10 },
+              { txt: "Apenas sondando preços e novidades de mercado sem prazo definido.", score: 2 }
+            ]
+          },
+          {
+            pilar: "Conexão com Expositores",
+            question: "Deseja agendamento VIP de demonstração prática nos estandes das marcas prioritárias?",
+            options: [
+              { txt: "Sim, quero atendimento prioritário no estande para demonstração técnica.", score: 15 },
+              { txt: "Quero receber o roteiro de recomendações e visitar por conta própria.", score: 10 },
+              { txt: "Não tenho interesse em contato comercial durante o evento.", score: 0 }
+            ]
+          }
+        ]
+      };
+    } else {
+      // MODO EXPOSITOR / EMPRESA B2B
+      const niche = cnpjData?.cnaePrincipal || "Soluções Corporativas Especializadas";
+      return {
+        brandName: brand.slice(0, 32),
+        logoUrl: "",
+        logoHeight: 32,
+        headerLayout: "logo-left",
+        showBrandNameWithLogo: true,
+        brandNameSize: 14,
+        primaryColor: "#0070F3",
+        whatsapp: cnpjData?.telefone || "5548999129069",
+        minScore: 65,
+        webhook: "",
+        headline: `${brand.toUpperCase()}: DIAGNÓSTICO DE ELEGIBILIDADE & QUALIFICAÇÃO DE ALTO IMPACTO.`,
+        subheadline: `Avalie em 2 minutos se o perfil do seu negócio está preparado para implementar as soluções da ${brand}.`,
+        subtext2: "Inteligência consultiva direta. Responda ao raio-x e receba uma análise de viabilidade técnica no WhatsApp.",
+        ctaText: "SOLICITAR AVALIAÇÃO DE FIT ›",
+        company: {
+          razaoSocial: cnpjData?.razaoSocial || `${brand} Soluções Empresariais LTDA`,
+          nomeFantasia: brand,
+          cnpj: cleanCnpjStr,
+          segmento: niche,
+          cidadeEstado: cityUf,
+          email: cnpjData?.email || "contato@empresa.com.br",
+          showFooter: true
+        },
+        styles: JSON.parse(JSON.stringify(DEFAULT_STYLES)),
+        whatsappTemplate: {
+          headerText: `🔥 *NOVO LEAD QUALIFICADO — ${brand.toUpperCase()}*`,
+          includeLeadInfo: true,
+          includeScore: true,
+          includeQuestions: true,
+          questionsTitle: "📋 *DADOS & RESPOSTAS DO CLIENTE:*",
+          closingText: "⚡ *Próximo Passo:* Agendar reunião técnica de apresentação e proposta comercial."
+        },
+        bullets: [
+          { icon: "🎯", text: `Soluções Específicas de ${niche.split('/')[0].slice(0, 24)}` },
+          { icon: "⚡", text: "Atendimento Consultivo Direto" },
+          { icon: "💎", text: "Prioridade para Decisores Comerciais" }
+        ],
+        drawer: {
+          title: `DIRETRIZES DE QUALIFICAÇÃO COMERCIAL — ${brand.toUpperCase()}`,
+          intro: `Nosso time atende exclusivamente empresas com alinhamento operacional e capacidade de execução.`,
+          videoUrl: "",
+          points: [
+            { icon: "🎯", title: "Fit Operacional", text: "Garantimos resultados superiores para clientes com processos já estabelecidos." },
+            { icon: "⚡", title: "Prontidão de Implementação", text: "Priorizamos parceiros com orçamento alocado e decisão ágil." },
+            { icon: "💎", title: "Comprometimento de Equipe", text: "Soluções de alto impacto dependem do engajamento dos gestores envolvidos." }
+          ],
+          conclusion: "Refaça a avaliação quando sua organização atingir os critérios mínimos de elegibilidade."
+        },
+        drawerText: `A ${brand} prioriza o atendimento a clientes com prontidão comercial e capacidade de investimento imediata.`,
+        questions: [
+          {
+            pilar: "Necessidade & Objetivo",
+            question: `Qual é o seu principal objetivo ao buscar as soluções da ${brand}?`,
+            options: [
+              { txt: "Demanda prioritária e imediata com orçamento já alocado.", score: 15 },
+              { txt: "Planejamento estruturado para implantação nos próximos meses.", score: 10 },
+              { txt: "Apenas pesquisando valores de mercado por curiosidade.", score: 0 }
+            ]
+          },
+          {
+            pilar: "Capacidade & Investimento",
+            question: "Qual faixa de aporte financeiro sua organização planeja dedicar a este projeto?",
+            options: [
+              { txt: "Investimento de alto valor condizente com soluções líderes de mercado.", score: 15 },
+              { txt: "Investimento moderado dentro da média do setor.", score: 10 },
+              { txt: "Busco exclusivamente a opção de menor custo financeiro.", score: 2 }
+            ]
+          },
+          {
+            pilar: "Autoridade de Decisão",
+            question: "Qual é o seu papel no processo de contratação desta tecnologia / serviço?",
+            options: [
+              { txt: "Sou o decisor final ou participo diretamente da aprovação da diretoria.", score: 15 },
+              { txt: "Faço a triagem técnica e levo a recomendação para o comitê de compras.", score: 10 },
+              { txt: "Não participo das decisões financeiras da instituição.", score: 0 }
+            ]
+          },
+          {
+            pilar: "Prazo de Início",
+            question: "Havendo validação técnica positiva, quando deseja iniciar os trabalhos?",
+            options: [
+              { txt: "Imediatamente nas próximas semanas.", score: 15 },
+              { txt: "No decorrer do próximo trimestre.", score: 8 },
+              { txt: "Sem prazo definido, apenas mapeando o mercado.", score: 0 }
+            ]
+          }
+        ]
+      };
+    }
+  }
+
+  async function handleInspectClick() {
+    const url = (document.getElementById('ingest-url-input')?.value || '').trim();
+    const cnpj = (document.getElementById('ingest-cnpj-input')?.value || '').trim();
+
+    if (!url && !cnpj) {
+      showToast('⚠️ Digite ao menos a URL ou o CNPJ.');
+      return;
+    }
+
+    const btn = document.getElementById('btn-ingest-inspect');
+    const label = document.getElementById('btn-ingest-inspect-label');
+    if (btn) btn.disabled = true;
+    if (label) label.innerText = 'Lendo fontes...';
+
+    try {
+      const results = await inspectSource({ url, cnpj });
+      const box = document.getElementById('ingest-inspection-box');
+      const details = document.getElementById('ingest-preview-details');
+      const badge = document.getElementById('ingest-source-badge');
+
+      if (box && details) {
+        let items = '';
+        if (results.inferredBrand) {
+          items += `<div><span class="text-neutral-500 font-bold block">Nome / Marca:</span><strong class="text-white">${results.inferredBrand}</strong></div>`;
+        }
+        if (results.cnpjData) {
+          items += `<div><span class="text-neutral-500 font-bold block">CNPJ / Razão:</span><span class="font-mono text-cyan-300">${results.cnpjData.cnpj}</span> • <span class="truncate block">${results.cnpjData.razaoSocial}</span></div>`;
+          items += `<div><span class="text-neutral-500 font-bold block">Atividade / CNAE:</span><span class="text-amber-300">${results.cnpjData.cnaePrincipal}</span></div>`;
+          items += `<div><span class="text-neutral-500 font-bold block">Localização:</span><span class="text-neutral-200">${results.cnpjData.cidadeEstado}</span></div>`;
+        }
+        if (results.urlData) {
+          items += `<div class="col-span-full"><span class="text-neutral-500 font-bold block">Site Lido:</span><span class="text-emerald-400 font-mono">${results.urlData.url}</span> (${results.urlData.rawLength} bytes lidos)</div>`;
+        }
+
+        details.innerHTML = items || '<p class="text-neutral-400">Dados mínimos identificados.</p>';
+        if (badge) {
+          const sources = [];
+          if (results.urlData) sources.push('Jina Reader');
+          if (results.cnpjData) sources.push('BrasilAPI');
+          badge.innerText = sources.join(' + ') || 'Web Source';
+        }
+        box.classList.remove('hidden');
+      }
+
+      showToast('✓ Dados da organização extraídos com sucesso!');
+    } catch(err) {
+      console.error(err);
+      showToast('⚠️ Erro ao inspecionar: ' + err.message);
+    } finally {
+      if (btn) btn.disabled = false;
+      if (label) label.innerText = '1. Ler & Inspecionar';
+    }
+  }
+
+  async function handleGenerateClick() {
+    const url = (document.getElementById('ingest-url-input')?.value || '').trim();
+    const cnpj = (document.getElementById('ingest-cnpj-input')?.value || '').trim();
+    const mode = document.getElementById('ingest-mode-select')?.value || 'event';
+    const tone = document.getElementById('ingest-tone-select')?.value || 'desafiadora';
+
+    if (!url && !cnpj) {
+      showToast('⚠️ Digite ao menos a URL ou o CNPJ para gerar.');
+      return;
+    }
+
+    const btn = document.getElementById('btn-ingest-generate');
+    const label = document.getElementById('btn-ingest-generate-label');
+    if (btn) btn.disabled = true;
+    if (label) label.innerText = 'Sintetizando LST...';
+
+    try {
+      const results = await inspectSource({ url, cnpj });
+
+      // Verificar se há chaves de IA (OpenRouter ou Groq) ativas
+      let newConfig = null;
+      const orKey = iaKit.getOpenRouterKey();
+      const groqKey = iaKit.getGroqKey();
+
+      if (orKey || groqKey) {
+        try {
+          if (label) label.innerText = 'Conectando LLM...';
+          const prompt = `Gere uma configuração completa de qualificador PUV Score LST v2 no schema JSON abaixo com base nestes dados da instituição:
+- Marca / Evento: ${results.inferredBrand || 'Organização'}
+- Escopo do LST: ${mode === 'event' ? '🎪 Qualificador Geral do Congresso / Evento (qualifica congressistas e direciona estandes)' : '🏢 Qualificador do Expositor / Negócio B2B (qualifica clientes do estande)'}
+- Tom do Diagnóstico: ${tone}
+- CNPJ: ${results.cnpjData ? `${results.cnpjData.cnpj} - ${results.cnpjData.razaoSocial} (${results.cnpjData.cnaePrincipal})` : 'Não informado'}
+- Conteúdo extraído do Site:
+${results.urlData ? results.urlData.markdownSample.slice(0, 3000) : 'Não informado'}
+
+Gere entre 4 e 6 perguntas indutivas ponderadas (0 a 15 pts por opção), 3 bullets de impacto e dados cadastrais alinhados.
+Retorne ESTRITAMENTE o JSON no schema de currentConfig.`;
+
+          const rawResponse = await iaKit.chamar(prompt);
+          if (rawResponse) {
+            newConfig = iaKit.parseJSON(rawResponse);
+          }
+        } catch(llmErr) {
+          console.warn('LLM indisponível, usando motor determinístico nativo:', llmErr);
+        }
+      }
+
+      // Se LLM não estiver configurada ou falhar, usa Motor Determinístico Nativo Especializado
+      if (!newConfig || !newConfig.questions) {
+        newConfig = synthesizeDeterministicLst({
+          cnpjData: results.cnpjData,
+          urlData: results.urlData,
+          mode,
+          tone
+        });
+      }
+
+      if (newConfig && newConfig.questions && Array.isArray(newConfig.questions)) {
+        currentConfig = newConfig;
+        if (!currentConfig.logoHeight) currentConfig.logoHeight = 28;
+        if (!currentConfig.brandNameSize) currentConfig.brandNameSize = 18;
+        if (!currentConfig.headerLayout) currentConfig.headerLayout = 'logo-left';
+        if (currentConfig.showBrandNameWithLogo === undefined) currentConfig.showBrandNameWithLogo = true;
+        currentConfig.styles = normalizeStyles(currentConfig.styles);
+        if (!currentConfig.company) currentConfig.company = { showFooter: true };
+        
+        populateFormFromConfig();
+        renderBulletsEditor();
+        renderQuestionsList();
+        refreshPreview();
+        updateLogicStatsBar();
+        
+        const snap = historyEngine.recordSnapshot(`Ingestão: ${currentConfig.brandName}`, 'ai');
+        triggerAiUpdateHighlights("✨ Qualificador gerado com sucesso a partir da URL/CNPJ!");
+        showToast(`✨ LST v5.2 gerado para "${currentConfig.brandName}"!`);
+        
+        goToGuidedStep(2);
+      }
+    } catch(err) {
+      console.error(err);
+      showToast('⚠️ Erro ao gerar LST: ' + err.message);
+    } finally {
+      if (btn) btn.disabled = false;
+      if (label) label.innerText = '2. Gerar LST Completo';
+    }
+  }
+
+  return {
+    cleanCnpj,
+    formatCnpj,
+    maskCnpjInput,
+    prefillCbpcmlExample,
+    fetchCnpjData,
+    fetchUrlContent,
+    inspectSource,
+    synthesizeDeterministicLst,
+    handleInspectClick,
+    handleGenerateClick
+  };
+})();
+
 const iaKit = (() => {
   const PREFIX = 'fnw-lst-ia';
   const get = k => { try { return localStorage.getItem(`${PREFIX}-${k}`) || ''; } catch(e) { return ''; } };
@@ -7780,7 +8540,7 @@ if (document.readyState === 'loading') {
 
 
 // ============================================================================
-// MOTOR DE DEPLOY NETLIFY ONE-CLICK & EMPACOTAMENTO ZIP (v5.1.3 High-Speed CORS & GTM Pro)
+// MOTOR DE DEPLOY NETLIFY ONE-CLICK & EMPACOTAMENTO ZIP (v5.2 High-Speed CORS & GTM Pro)
 // ============================================================================
 var netlifyDeployEngine = window.netlifyDeployEngine = (() => {
   const LS_TOKEN_KEY = "lst_netlify_token";
@@ -10087,7 +10847,7 @@ function syncDrawerVideoExpert(val) {
 
 
 // ==========================================
-// GERADOR DE CONTAINER OFICIAL DO GOOGLE TAG MANAGER (v5.1.3)
+// GERADOR DE CONTAINER OFICIAL DO GOOGLE TAG MANAGER (v5.2)
 // ==========================================
 function downloadGTMContainerJSON() {
   const gtmId = (document.getElementById('cfg-tracking-gtm')?.value || currentConfig?.tracking?.gtmId || '').trim() || 'GTM-LST_QUALIFIER';
@@ -10101,7 +10861,7 @@ function downloadGTMContainerJSON() {
       "accountId": "1",
       "containerId": "1",
       "container": {
-        "name": "LST Qualifier - " + brand + " (v5.1.3)",
+        "name": "LST Qualifier - " + brand + " (v5.2)",
         "publicId": gtmId,
         "usageContext": ["WEB"]
       },
@@ -12393,6 +13153,19 @@ let currentGalleryActiveTab = 'all';
 function getFactoryPresetsList() {
   return [
     {
+      id: 'native_cbpcml_2026',
+      name: '58º CBPC/ML 2026 (Congresso de Patologia Clínica)',
+      icon: '🔬',
+      category: 'Eventos & Saúde',
+      desc: 'Qualificador de congressistas para mapear maturidade laboratorial, IA diagnóstica e roteamento de estandes no CentroSul.',
+      isNative: true,
+      isFavorite: true,
+      enabled: true,
+      createdAt: '2026-09-14T12:00:00.000Z',
+      updatedAt: '2026-09-14T12:00:00.000Z',
+      config: JSON.parse(JSON.stringify(PRESETS.cbpcml_2026))
+    },
+    {
       id: 'native_fnw_b2b',
       name: 'FNW & Partners (Prospecção Bio/Site B2B)',
       icon: '🎯',
@@ -12869,7 +13642,7 @@ function buildFullWorkspaceBundle() {
     version: "5.1",
     type: "lst_full_workspace_backup",
     exportedAt: new Date().toISOString(),
-    system: "LST Studio v5.1.3 (FNW Ecosystem)",
+    system: "LST Studio v5.2 (FNW Ecosystem)",
     activeModelId: currentActiveModelId || 'native_fnw',
     activeConfig: JSON.parse(JSON.stringify(currentConfig)),
     galleryModels: allModels,
@@ -19002,7 +19775,7 @@ function dispatchTrackingEvent(eventName, payload, altNames) {
       }
     }
 
-    console.log("📊 [Tracking LST v5.1.3] Evento disparado com sucesso:", eventName, baseData);
+    console.log("📊 [Tracking LST v5.2] Evento disparado com sucesso:", eventName, baseData);
   } catch(err) {
     console.warn("Aviso no tracking do LST:", err);
   }
@@ -20425,7 +21198,7 @@ function saveNetlifyTokenFromModal() {
         <div class="flex items-center justify-center gap-2">
           <span class="text-2xl font-black text-white tracking-tight leading-none">LST</span>
           <span class="text-2xl font-black text-blue-400 tracking-tight leading-none">Studio</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono bg-blue-500/20 text-blue-400 border border-blue-500/40 shadow-sm">v5.1.3</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono bg-blue-500/20 text-blue-400 border border-blue-500/40 shadow-sm">v5.2</span>
         </div>
         <p class="text-neutral-300 text-xs mt-1.5 font-semibold">Autenticação &amp; Gestão de Acesso</p>
       </div>
@@ -20597,7 +21370,7 @@ function saveNetlifyTokenFromModal() {
           <div>
             <div class="flex items-center gap-2">
               <h3 class="text-base font-black uppercase tracking-wide">Central de Publicação &amp; Links LST</h3>
-              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded font-mono border" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); color: var(--theme-c1, #3b82f6); border-color: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.35);">v5.1.3 Live</span>
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded font-mono border" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); color: var(--theme-c1, #3b82f6); border-color: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.35);">v5.2 Live</span>
             </div>
             <p class="text-xs mt-0.5" style="color: var(--text-muted, #94a3b8);">Aprenda a colocar seu qualificador no ar em 1 minuto ou integrá-lo em qualquer site.</p>
           </div>
