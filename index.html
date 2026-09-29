@@ -1,11 +1,10 @@
-
-<!-- © FNW Advisory & Partners — LST Studio Builder v5.6.4 (Responsivo Independente Mobile/Tablet/Desktop) -->
+<!-- © FNW Advisory & Partners — LST Studio Builder v5.7.0 (Responsivo Independente Mobile/Tablet/Desktop) -->
 <!doctype html>
 <html lang="pt-BR" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LST Studio Builder v5.6.4 - FNW Ecosystem</title>
+<title>LST Studio Builder v5.7.0 - FNW Ecosystem</title>
 
 <!-- Google Fonts & Tailwind -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2985,7 +2984,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
       <img src="https://d1yei2z3i6k35z.cloudfront.net/3119789/69971d1031628_FNWNEWLogo_26.png" alt="FNW Logo" class="h-[42px] w-auto object-contain drop-shadow-[0_0_10px_rgba(147,107,255,0.45)] transition hover:scale-105" />
       <div class="flex items-center gap-2">
         <h1 class="font-black text-base text-white tracking-tight leading-none"><span class="text-white">LST</span> <span class="theme-accent-text" id="header-branding-title" style="color:var(--theme-c1,#3b82f6)">Studio</span></h1>
-        <span id="header-version-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono shadow-sm transition-all" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); border: 1px solid rgba(var(--theme-c1-rgb, 59, 130, 246), 0.5); color: var(--theme-c1, #60a5fa);">v5.6.4</span>
+        <span id="header-version-badge" class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono shadow-sm transition-all" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); border: 1px solid rgba(var(--theme-c1-rgb, 59, 130, 246), 0.5); color: var(--theme-c1, #60a5fa);">v5.7.0</span>
       </div>
     </div>
 
@@ -4784,6 +4783,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
               <div>
                 <label class="block text-[11px] font-bold text-neutral-400 uppercase mb-1.5">Nota de Corte Mínima (Score / 100)</label>
                 <input type="number" class="input-field font-mono" id="cfg-minScore" oninput="updateConfigFromInputs()" value="65" min="0" max="100">
+                <span class="text-[10px] text-amber-400 block mt-1 font-semibold flex items-center gap-1"><span>🎯</span> Define a liberação do contato comercial (WhatsApp) em ambos os modos.</span>
               </div>
             </div>
 
@@ -4913,12 +4913,12 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
 
             <!-- SUB-BOX: COMUNICAÇÃO DE RESULTADO POR FAIXA DE SCORE (DIAGNÓSTICO EMPÁTICO & CONSEQUÊNCIA) -->
             <div class="card-control p-5 space-y-4 mt-4" id="section-results-box">
-              <div class="flex items-center justify-between border-b border-neutral-800 pb-3">
+              <div class="flex items-center justify-between border-b border-neutral-800 pb-3 flex-wrap gap-2">
                 <div class="flex items-center gap-2">
                   <span class="text-xl">🏆</span>
                   <div>
-                    <h3 class="text-xs font-black uppercase tracking-wider text-neutral-200">Comunicação da Tela de Resultado (Por Faixa de Score)</h3>
-                    <p class="text-[11px] text-neutral-400">Mensagens calibradas com empatia e autoridade de acordo com a pontuação e consequência.</p>
+                    <h3 class="text-xs font-black uppercase tracking-wider text-neutral-200">Comunicação da Tela de Resultado &amp; Classificação do Lead</h3>
+                    <p class="text-[11px] text-neutral-400">Escolha o modelo de classificação (Binário ou Escalonado) e personalize diagnósticos e botões.</p>
                   </div>
                 </div>
                 <button type="button" onclick="openIaResultsModal()" class="tool-btn !py-1.5 !px-3 !text-xs">
@@ -4926,30 +4926,134 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
                 </button>
               </div>
 
-              <!-- BARRA DE SIMULAÇÃO RÁPIDA NO PREVIEW -->
-              <div class="p-3 bg-neutral-900/90 rounded-xl border border-neutral-800 flex flex-wrap items-center justify-between gap-2">
+              <!-- SELETOR DE MODO DE CLASSIFICAÇÃO (v5.7) -->
+              <div class="p-3.5 bg-neutral-900/90 rounded-xl border border-neutral-800 space-y-2.5">
+                <div class="flex items-center justify-between">
+                  <label class="block text-[11px] font-black uppercase text-neutral-300">Tipo de Classificação do Lead</label>
+                  <span id="classification-mode-badge" class="text-[9px] font-black uppercase px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30">Modo Binário</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <button type="button" id="btn-classification-binary" onclick="setClassificationMode('binary')" class="py-2.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 border cursor-pointer bg-blue-600 text-white border-blue-500 shadow-md">
+                    <span>⚖️</span> Modo Binário (Qualificado / Não Qualificado)
+                  </button>
+                  <button type="button" id="btn-classification-tiered" onclick="setClassificationMode('tiered')" class="py-2.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 border cursor-pointer bg-neutral-900/80 text-neutral-400 border-neutral-800 hover:text-white">
+                    <span>📈</span> Modo Escalonado (Faixas de Maturidade)
+                  </button>
+                </div>
+                <p id="classification-mode-desc" class="text-[11px] text-neutral-400 leading-relaxed">
+                  <strong>Modo Binário:</strong> O lead é classificado estritamente como <strong>Qualificado</strong> (acesso ao WhatsApp comercial liberado) ou <strong>Não Qualificado</strong> (contato bloqueado, direcionando para diretrizes educativas), com base na Nota Mínima de Corte.
+                </p>
+              </div>
+
+              <!-- BARRA DE SIMULAÇÃO RÁPIDA NO PREVIEW (BINÁRIA) -->
+              <div id="sim-buttons-binary" class="p-3 bg-neutral-900/90 rounded-xl border border-neutral-800 flex flex-wrap items-center justify-between gap-2">
                 <span class="text-[10px] font-black uppercase text-neutral-400 flex items-center gap-1">
                   <span>🧪</span> Testar no Simulador:
                 </span>
                 <div class="flex items-center gap-1.5 flex-wrap">
-                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 12 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">🌱 Score 12</button>
-                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 50 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">⚖️ Score 50</button>
-                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 75 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">⚡ Score 75</button>
-                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 95 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">🏆 Score 95</button>
+                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 35 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">🔴 Não Qualificado (Score 35)</button>
+                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 80 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">🟢 Qualificado (Score 80)</button>
                 </div>
               </div>
 
-              <!-- FAIXAS DE SCORE (4 TIERS) -->
-              <div class="space-y-3">
-                <!-- TIER 1: SCORE BAIXO (0 A 39 PTS) - PASSO ZERO & PÉS NO CHÃO -->
-                <div class="p-3.5 bg-neutral-900/80 rounded-xl border border-neutral-800 space-y-2">
+              <!-- BARRA DE SIMULAÇÃO RÁPIDA NO PREVIEW (ESCALONADA) -->
+              <div id="sim-buttons-tiered" class="p-3 bg-neutral-900/90 rounded-xl border border-neutral-800 flex flex-wrap items-center justify-between gap-2" style="display:none;">
+                <span class="text-[10px] font-black uppercase text-neutral-400 flex items-center gap-1">
+                  <span>🧪</span> Testar Faixa no Simulador:
+                </span>
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 25 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">🌱 Exploração (25)</button>
+                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 55 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">⚖️ Oportunidade em Desenv. (55)</button>
+                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 75 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">⚡ Oportunidade (75)</button>
+                  <button type="button" onclick="sendPreviewCommand('showResult', { score: 95 })" class="tool-btn !py-1 !px-2.5 !text-[11px]">🏆 Prioridade (95)</button>
+                </div>
+              </div>
+
+              <!-- ======================================================== -->
+              <!-- CONTAINER 1: MODO BINÁRIO (QUALIFICADO / NÃO QUALIFICADO) -->
+              <!-- ======================================================== -->
+              <div id="container-results-binary" class="space-y-3">
+                <!-- QUALIFICADO -->
+                <div class="p-3.5 bg-neutral-900/80 rounded-xl border border-emerald-500/30 space-y-2">
                   <div class="flex items-center justify-between border-b border-neutral-800/60 pb-1.5">
-                    <span class="text-xs font-black uppercase text-neutral-400 flex items-center gap-1.5">
-                      <span>🌱</span> Faixa 1: Score 0 a 39 (Passo Zero / Pés no Chão)
+                    <span class="text-xs font-black uppercase text-emerald-400 flex items-center gap-1.5">
+                      <span>🟢</span> Lead Qualificado (Score &gt;= <span class="lbl-min-score font-mono">65</span>)
                     </span>
-                    <span class="text-[10px] text-neutral-500 font-mono">Ação: Abre Drawer</span>
+                    <span class="text-[10px] text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">✅ Contato Comercial Liberado (WhatsApp)</span>
                   </div>
                   <div class="grid grid-cols-2 gap-2">
+                    <div>
+                      <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Badge de Status</label>
+                      <input type="text" id="cfg-binary-qual-badge" class="input-field !text-xs !py-1 text-neutral-300 font-bold" oninput="updateScoreTiersFromInputs()">
+                    </div>
+                    <div>
+                      <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Título do Diagnóstico</label>
+                      <input type="text" id="cfg-binary-qual-title" class="input-field !text-xs !py-1 text-white font-bold" oninput="updateScoreTiersFromInputs()">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Mensagem de Aprovação</label>
+                    <textarea id="cfg-binary-qual-desc" class="input-field !text-xs" rows="2" oninput="updateScoreTiersFromInputs()"></textarea>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Texto do Botão (WhatsApp Comercial)</label>
+                    <input type="text" id="cfg-binary-qual-btn" class="input-field !text-xs !py-1" oninput="updateScoreTiersFromInputs()">
+                  </div>
+                </div>
+
+                <!-- NÃO QUALIFICADO -->
+                <div class="p-3.5 bg-neutral-900/80 rounded-xl border border-rose-500/30 space-y-2">
+                  <div class="flex items-center justify-between border-b border-neutral-800/60 pb-1.5">
+                    <span class="text-xs font-black uppercase text-rose-400 flex items-center gap-1.5">
+                      <span>🔴</span> Lead Não Qualificado (Score &lt; <span class="lbl-min-score font-mono">65</span>)
+                    </span>
+                    <span class="text-[10px] text-rose-400 font-mono bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/30">🔒 Contato Bloqueado (Abre Diretrizes/Drawer)</span>
+                  </div>
+                  <div class="grid grid-cols-2 gap-2">
+                    <div>
+                      <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Badge de Status</label>
+                      <input type="text" id="cfg-binary-desqual-badge" class="input-field !text-xs !py-1 text-neutral-300 font-bold" oninput="updateScoreTiersFromInputs()">
+                    </div>
+                    <div>
+                      <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Título do Diagnóstico</label>
+                      <input type="text" id="cfg-binary-desqual-title" class="input-field !text-xs !py-1 text-white font-bold" oninput="updateScoreTiersFromInputs()">
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Mensagem Educativa (Proteção de Caixa &amp; Alinhamento)</label>
+                    <textarea id="cfg-binary-desqual-desc" class="input-field !text-xs" rows="2" oninput="updateScoreTiersFromInputs()"></textarea>
+                  </div>
+                  <div>
+                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Texto do Botão (Abre Conteúdo Educativo)</label>
+                    <input type="text" id="cfg-binary-desqual-btn" class="input-field !text-xs !py-1" oninput="updateScoreTiersFromInputs()">
+                  </div>
+                </div>
+              </div>
+
+              <!-- ======================================================== -->
+              <!-- CONTAINER 2: MODO ESCALONADO (4 FAIXAS DE MATURIDADE)    -->
+              <!-- ======================================================== -->
+              <div id="container-results-tiered" class="space-y-3" style="display:none;">
+                <div class="p-3 rounded-xl border border-amber-500/30 bg-amber-500/10 flex items-start gap-2.5">
+                  <span class="text-base flex-shrink-0">💡</span>
+                  <p class="text-xs text-amber-200 leading-relaxed">
+                    <strong>Regra de Ouro do Modo Escalonado:</strong> As faixas organizam os estágios de maturidade. A <strong>Nota Mínima de Corte (<span class="lbl-min-score font-bold font-mono">65</span> pts)</strong> continua sendo a regra para liberar o contato comercial. Se o score for menor que a nota mínima, o botão abre o conteúdo educativo.
+                  </p>
+                </div>
+
+                <!-- TIER 1: SCORE BAIXO (0 A 39 PTS) -->
+                <div class="p-3.5 bg-neutral-900/80 rounded-xl border border-neutral-800 space-y-2">
+                  <div class="flex items-center justify-between border-b border-neutral-800/60 pb-1.5 flex-wrap gap-1">
+                    <span class="text-xs font-black uppercase text-neutral-400 flex items-center gap-1.5">
+                      <span>🌱</span> Faixa 1: Score 0 a 39
+                    </span>
+                    <span id="tier-low-lock-badge" class="text-[10px] text-neutral-400 font-mono bg-neutral-800 px-2 py-0.5 rounded border border-neutral-700">🔒 Contato Bloqueado</span>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <div>
+                      <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Nome do Estágio</label>
+                      <input type="text" id="cfg-tier-low-name" class="input-field !text-xs !py-1 text-white font-bold" oninput="updateScoreTiersFromInputs()" placeholder="Ex: Exploração">
+                    </div>
                     <div>
                       <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Badge de Status</label>
                       <input type="text" id="cfg-tier-low-badge" class="input-field !text-xs !py-1 text-neutral-300 font-bold" oninput="updateScoreTiersFromInputs()">
@@ -4960,7 +5064,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
                     </div>
                   </div>
                   <div>
-                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Mensagem Empática (Proteção de Caixa & Consequência)</label>
+                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Mensagem do Diagnóstico</label>
                     <textarea id="cfg-tier-low-desc" class="input-field !text-xs" rows="2" oninput="updateScoreTiersFromInputs()"></textarea>
                   </div>
                   <div>
@@ -4969,15 +5073,19 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
                   </div>
                 </div>
 
-                <!-- TIER 2: SCORE MÉDIO (40 A 64 PTS) - AJUSTE FINO & GARGALOS -->
+                <!-- TIER 2: SCORE MÉDIO (40 A MINSCORE - 1) -->
                 <div class="p-3.5 bg-neutral-900/80 rounded-xl border border-neutral-800 space-y-2">
-                  <div class="flex items-center justify-between border-b border-neutral-800/60 pb-1.5">
+                  <div class="flex items-center justify-between border-b border-neutral-800/60 pb-1.5 flex-wrap gap-1">
                     <span class="text-xs font-black uppercase text-neutral-400 flex items-center gap-1.5">
-                      <span>⚖️</span> Faixa 2: Score 40 a 64 (Ajuste Fino & Gargalos)
+                      <span>⚖️</span> Faixa 2: Score 40 a <span class="lbl-mid-max font-mono">64</span>
                     </span>
-                    <span class="text-[10px] text-neutral-500 font-mono">Ação: Abre Drawer</span>
+                    <span id="tier-mid-lock-badge" class="text-[10px] text-neutral-400 font-mono bg-neutral-800 px-2 py-0.5 rounded border border-neutral-700">🔒 Contato Bloqueado</span>
                   </div>
-                  <div class="grid grid-cols-2 gap-2">
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <div>
+                      <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Nome do Estágio</label>
+                      <input type="text" id="cfg-tier-mid-name" class="input-field !text-xs !py-1 text-white font-bold" oninput="updateScoreTiersFromInputs()" placeholder="Ex: Oportunidade em desenvolvimento">
+                    </div>
                     <div>
                       <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Badge de Status</label>
                       <input type="text" id="cfg-tier-mid-badge" class="input-field !text-xs !py-1 text-neutral-300 font-bold" oninput="updateScoreTiersFromInputs()">
@@ -4988,7 +5096,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
                     </div>
                   </div>
                   <div>
-                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Mensagem Empática (Destravar Conversão)</label>
+                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Mensagem do Diagnóstico</label>
                     <textarea id="cfg-tier-mid-desc" class="input-field !text-xs" rows="2" oninput="updateScoreTiersFromInputs()"></textarea>
                   </div>
                   <div>
@@ -4997,15 +5105,19 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
                   </div>
                 </div>
 
-                <!-- TIER 3: SCORE QUALIFICADO (65 A 84 PTS) - APTO PARA IMPLEMENTAÇÃO -->
+                <!-- TIER 3: SCORE QUALIFICADO (MINSCORE A 84 PTS) -->
                 <div class="p-3.5 bg-neutral-900/80 rounded-xl border border-neutral-800 space-y-2">
-                  <div class="flex items-center justify-between border-b border-neutral-800/60 pb-1.5">
+                  <div class="flex items-center justify-between border-b border-neutral-800/60 pb-1.5 flex-wrap gap-1">
                     <span class="text-xs font-black uppercase text-neutral-400 flex items-center gap-1.5">
-                      <span>⚡</span> Faixa 3: Score 65 a 84 (Qualificado & Apto)
+                      <span>⚡</span> Faixa 3: Score <span class="lbl-min-score font-mono">65</span> a 84
                     </span>
-                    <span class="text-[10px] text-neutral-500 font-mono">Ação: WhatsApp</span>
+                    <span id="tier-high-lock-badge" class="text-[10px] text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">🟢 Contato Comercial Liberado (WhatsApp)</span>
                   </div>
-                  <div class="grid grid-cols-2 gap-2">
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <div>
+                      <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Nome do Estágio</label>
+                      <input type="text" id="cfg-tier-high-name" class="input-field !text-xs !py-1 text-white font-bold" oninput="updateScoreTiersFromInputs()" placeholder="Ex: Oportunidade">
+                    </div>
                     <div>
                       <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Badge de Status</label>
                       <input type="text" id="cfg-tier-high-badge" class="input-field !text-xs !py-1 text-neutral-300 font-bold" oninput="updateScoreTiersFromInputs()">
@@ -5025,15 +5137,19 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
                   </div>
                 </div>
 
-                <!-- TIER 4: SCORE DE ELITE (85 A 100 PTS) - PRIORIDADE MÁXIMA -->
+                <!-- TIER 4: SCORE DE ELITE (85 A 100 PTS) -->
                 <div class="p-3.5 bg-neutral-900/80 rounded-xl border border-neutral-800 space-y-2">
-                  <div class="flex items-center justify-between border-b border-neutral-800/60 pb-1.5">
+                  <div class="flex items-center justify-between border-b border-neutral-800/60 pb-1.5 flex-wrap gap-1">
                     <span class="text-xs font-black uppercase text-neutral-400 flex items-center gap-1.5">
-                      <span>🏆</span> Faixa 4: Score 85 a 100 (Prioridade Máxima / VIP)
+                      <span>🏆</span> Faixa 4: Score 85 a 100
                     </span>
-                    <span class="text-[10px] text-neutral-500 font-mono">Ação: WhatsApp VIP</span>
+                    <span id="tier-elite-lock-badge" class="text-[10px] text-emerald-400 font-mono bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">🚀 Contato Comercial Liberado (Prioridade)</span>
                   </div>
-                  <div class="grid grid-cols-2 gap-2">
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <div>
+                      <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Nome do Estágio</label>
+                      <input type="text" id="cfg-tier-elite-name" class="input-field !text-xs !py-1 text-white font-bold" oninput="updateScoreTiersFromInputs()" placeholder="Ex: Prioridade">
+                    </div>
                     <div>
                       <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Badge de Status</label>
                       <input type="text" id="cfg-tier-elite-badge" class="input-field !text-xs !py-1 text-neutral-300 font-bold" oninput="updateScoreTiersFromInputs()">
@@ -5048,7 +5164,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
                     <textarea id="cfg-tier-elite-desc" class="input-field !text-xs" rows="2" oninput="updateScoreTiersFromInputs()"></textarea>
                   </div>
                   <div>
-                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Texto do Botão (WhatsApp)</label>
+                    <label class="block text-[10px] font-bold text-neutral-400 uppercase mb-1">Texto do Botão (WhatsApp VIP)</label>
                     <input type="text" id="cfg-tier-elite-btn" class="input-field !text-xs !py-1" oninput="updateScoreTiersFromInputs()">
                   </div>
                 </div>
@@ -6878,7 +6994,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
       </span>
       <div class="h-3 w-[1px] bg-neutral-800 hidden sm:block"></div>
       <span class="text-[10px] text-emerald-400/90 font-mono font-bold flex items-center gap-1">
-        <span>&#9889;</span> LST Engine v5.5.0 • GTM Pro & Netlify Deploy Ativos
+        <span>&#9889;</span> LST Engine v5.7.0 • GTM Pro & Netlify Deploy Ativos
       </span>
     </div>
   </footer>
@@ -8722,7 +8838,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
       <div id="cf-panel-planilha" class="space-y-4 hidden">
         <div class="cf-hero-card p-4 sm:p-5 rounded-2xl space-y-3.5">
           <h4 class="cf-card-title text-xs font-black uppercase tracking-wide flex items-center gap-2">
-            <span>⭐</span> A Regra de Ouro do Google Apps Script (Code.gs 5.6.4)
+            <span>⭐</span> A Regra de Ouro do Google Apps Script (Code.gs 5.7.0)
           </h4>
           <p class="cf-card-desc text-xs leading-relaxed font-semibold">
             Você só precisa abrir o editor do Google Apps Script e colar o código <span class="cf-check-pos underline font-black">UMA ÚNICA VEZ</span> por planilha nova!
@@ -8829,7 +8945,7 @@ html[data-theme-mode="light"] #card-qualification-logic-header .btn-logic-balanc
 
       <!-- RODAPÉ DO MODAL -->
       <div class="border-t cf-footer-border pt-4 flex justify-between items-center flex-wrap gap-3">
-        <span class="cf-footer-text text-xs font-mono font-medium">FNW LST ECOSYSTEM v5.6.4 &bull; Arquitetura Desacoplada</span>
+        <span class="cf-footer-text text-xs font-mono font-medium">FNW LST ECOSYSTEM v5.7.0 &bull; Arquitetura Desacoplada</span>
         <div class="flex items-center gap-2">
           <button type="button" onclick="openGoogleAppsScriptModal()" class="cf-btn-secondary px-3.5 py-2 rounded-xl text-xs font-bold transition cursor-pointer flex items-center gap-1.5">
             <span>📄</span> Ver Script Code.gs
@@ -9246,35 +9362,9 @@ function formatVideoEmbedHTML(url) {
   return '';
 }
 
-function normalizeScoreTiers(tiers, minScore = 65) {
-  const defaultTiers = {
-    low: {
-      min: 0,
-      max: 39,
-      badge: "🌱 MOMENTO INICIAL / PASSO ZERO",
-      badgeColor: "#94a3b8",
-      cardBg: "rgba(148, 163, 184, 0.05)",
-      borderColor: "rgba(148, 163, 184, 0.2)",
-      title: "Diagnóstico de Estruturação Básica",
-      desc: "Seu momento atual requer a organização do essencial antes de acelerar. Investir em campanhas de escala ou consultorias avançadas agora geraria desperdício financeiro e perda de tempo com curiosos. O foco precisa ser arrumar a base primeiro.",
-      btnText: "📖 VER O QUE AJUSTAR PRIMEIRO ›",
-      action: "drawer"
-    },
-    mid: {
-      min: 40,
-      max: (minScore - 1) || 64,
-      badge: "⚖️ MOMENTO DE AJUSTE & TRANSIÇÃO",
-      badgeColor: "#3b82f6",
-      cardBg: "rgba(59, 130, 246, 0.06)",
-      borderColor: "rgba(59, 130, 246, 0.25)",
-      title: "Diagnóstico de Transição & Gargalos",
-      desc: "Seu negócio já possui tração, porém detectamos gargalos na triagem de leads e na entrada comercial que travam a sua conversão. Alinhe esses pontos antes de buscar atendimento individual.",
-      btnText: "📖 VER PONTOS DE ATENÇÃO PARA ALINHAR ›",
-      action: "drawer"
-    },
-    high: {
-      min: minScore || 65,
-      max: 84,
+function normalizeBinaryResults(binary, scoreTiers = null, minScore = 65) {
+  const defaultBinary = {
+    qualified: {
       badge: "⚡ PERFIL QUALIFICADO & APTO",
       badgeColor: "var(--plug-gold)",
       cardBg: "rgba(0, 112, 243, 0.08)",
@@ -9284,10 +9374,90 @@ function normalizeScoreTiers(tiers, minScore = 65) {
       btnText: "💬 RECEBER PROPOSTA NO WHATSAPP ›",
       action: "whatsapp"
     },
+    disqualified: {
+      badge: "🌱 DIAGNÓSTICO EDUCATIVO / NÃO QUALIFICADO",
+      badgeColor: "#94a3b8",
+      cardBg: "rgba(148, 163, 184, 0.05)",
+      borderColor: "rgba(148, 163, 184, 0.2)",
+      title: "Diagnóstico de Estruturação & Alinhamento",
+      desc: "Seu momento atual requer a organização do essencial antes de acelerar. Investir em campanhas de escala ou consultorias avançadas agora geraria desperdício financeiro e perda de tempo. O foco precisa ser arrumar a base primeiro.",
+      btnText: "📖 VER O QUE AJUSTAR PRIMEIRO ›",
+      action: "drawer"
+    }
+  };
+
+  if (!binary || typeof binary !== 'object') {
+    if (scoreTiers && typeof scoreTiers === 'object') {
+      return {
+        qualified: Object.assign({}, defaultBinary.qualified, {
+          badge: scoreTiers.high?.badge || defaultBinary.qualified.badge,
+          title: scoreTiers.high?.title || defaultBinary.qualified.title,
+          desc: scoreTiers.high?.desc || defaultBinary.qualified.desc,
+          btnText: scoreTiers.high?.btnText || defaultBinary.qualified.btnText
+        }),
+        disqualified: Object.assign({}, defaultBinary.disqualified, {
+          badge: scoreTiers.low?.badge || defaultBinary.disqualified.badge,
+          title: scoreTiers.low?.title || defaultBinary.disqualified.title,
+          desc: scoreTiers.low?.desc || defaultBinary.disqualified.desc,
+          btnText: scoreTiers.low?.btnText || defaultBinary.disqualified.btnText
+        })
+      };
+    }
+    return defaultBinary;
+  }
+
+  return {
+    qualified: Object.assign({}, defaultBinary.qualified, binary.qualified || {}),
+    disqualified: Object.assign({}, defaultBinary.disqualified, binary.disqualified || {})
+  };
+}
+
+function normalizeScoreTiers(tiers, minScore = 65) {
+  const defaultTiers = {
+    low: {
+      name: "Exploração",
+      min: 0,
+      max: 39,
+      badge: "🌱 EXPLORAÇÃO / MOMENTO INICIAL",
+      badgeColor: "#94a3b8",
+      cardBg: "rgba(148, 163, 184, 0.05)",
+      borderColor: "rgba(148, 163, 184, 0.2)",
+      title: "Diagnóstico de Estruturação Básica",
+      desc: "Seu momento atual requer a organização do essencial antes de acelerar. Investir em campanhas de escala ou consultorias avançadas agora geraria desperdício financeiro e perda de tempo com curiosos. O foco precisa ser arrumar a base primeiro.",
+      btnText: "📖 VER O QUE AJUSTAR PRIMEIRO ›",
+      action: "drawer"
+    },
+    mid: {
+      name: "Oportunidade em desenvolvimento",
+      min: 40,
+      max: (minScore - 1) || 64,
+      badge: "⚖️ OPORTUNIDADE EM DESENVOLVIMENTO",
+      badgeColor: "#3b82f6",
+      cardBg: "rgba(59, 130, 246, 0.06)",
+      borderColor: "rgba(59, 130, 246, 0.25)",
+      title: "Diagnóstico de Transição & Gargalos",
+      desc: "Seu negócio já possui tração, porém detectamos gargalos na triagem de leads e na entrada comercial que travam a sua conversão. Alinhe esses pontos antes de buscar atendimento individual.",
+      btnText: "📖 VER PONTOS DE ATENÇÃO PARA ALINHAR ›",
+      action: "drawer"
+    },
+    high: {
+      name: "Oportunidade",
+      min: minScore || 65,
+      max: 84,
+      badge: "⚡ OPORTUNIDADE QUALIFICADA",
+      badgeColor: "var(--plug-gold)",
+      cardBg: "rgba(0, 112, 243, 0.08)",
+      borderColor: "rgba(0, 112, 243, 0.3)",
+      title: "Qualificação Comercial Aprovada",
+      desc: "Parabéns! Sua maturidade comercial, capacidade de atendimento e prontidão atendem aos critérios prioritários. Seu relatório foi aprovado e nossa equipe já pode recebê-lo.",
+      btnText: "💬 RECEBER PROPOSTA NO WHATSAPP ›",
+      action: "whatsapp"
+    },
     elite: {
+      name: "Prioridade",
       min: 85,
       max: 100,
-      badge: "🏆 ALTA PRIORIDADE & ELEGIBILIDADE MÁXIMA",
+      badge: "🏆 ALTA PRIORIDADE COMERCIAL",
       badgeColor: "#10b981",
       cardBg: "rgba(16, 185, 129, 0.08)",
       borderColor: "rgba(16, 185, 129, 0.35)",
@@ -15264,8 +15434,7 @@ const SEARCH_INDEX = [
     keywords: ['cidade', 'estado', 'ibge', 'localizacao', 'municipio', 'uf', 'brasil', 'autocomplete', 'geografia'],
     mode: 'advanced',
     tab: 'lead_form',
-    targetId: 'cfg-field-cidade-container',
-    focusInputId: 'cfg-field-cidade-label'
+    targetId: 'cfg-field-localizacao-enabled'
   },
   {
     id: 'geo-rules-knockout',
@@ -15276,7 +15445,7 @@ const SEARCH_INDEX = [
     keywords: ['regras geograficas', 'geo knockout', 'whitelist', 'blacklist', 'cidades qualificadas', 'bloquear cidades', 'bonus cidade', 'raio geografico', 'area alvo'],
     mode: 'advanced',
     tab: 'lead_form',
-    targetId: 'card-geo-qualification-rules'
+    targetId: 'geo-mode-selector'
   },
   {
     id: 'form-top-custom',
@@ -15287,7 +15456,7 @@ const SEARCH_INDEX = [
     keywords: ['campos topo', 'custom fields topo', 'adicionar campo topo', 'faixa etaria', 'cargo', 'perguntas topo'],
     mode: 'advanced',
     tab: 'lead_form',
-    targetId: 'top-custom-fields-container'
+    targetId: 'form-top-custom-fields-container'
   },
   {
     id: 'form-bottom-custom',
@@ -15298,7 +15467,7 @@ const SEARCH_INDEX = [
     keywords: ['campos rodape', 'campos final', 'custom fields rodape', 'adicionar campo final', 'momento de compra', 'urgencia'],
     mode: 'advanced',
     tab: 'lead_form',
-    targetId: 'bottom-custom-fields-container'
+    targetId: 'form-bottom-custom-fields-container'
   },
   {
     id: 'form-segmento',
@@ -15309,7 +15478,7 @@ const SEARCH_INDEX = [
     keywords: ['segmento', 'nicho', 'ramo', 'setor', 'b2b', 'b2c', 'knockout segmento', 'pontos segmento'],
     mode: 'advanced',
     tab: 'lead_form',
-    targetId: 'cfg-field-segmento-container'
+    targetId: 'cfg-field-segmento-label'
   },
   {
     id: 'form-faturamento',
@@ -15320,7 +15489,7 @@ const SEARCH_INDEX = [
     keywords: ['faturamento', 'receita', 'ticket', 'orcamento', 'porte', 'renda', 'knockout faturamento', 'pontos faturamento'],
     mode: 'advanced',
     tab: 'lead_form',
-    targetId: 'cfg-field-faturamento-container'
+    targetId: 'form-faturamento-options-container'
   },
   {
     id: 'form-social',
@@ -15331,7 +15500,7 @@ const SEARCH_INDEX = [
     keywords: ['instagram', 'site', 'redes sociais', 'url site', 'link', 'arroba'],
     mode: 'advanced',
     tab: 'lead_form',
-    targetId: 'cfg-field-instagram-container'
+    targetId: 'cfg-field-instagram-label'
   },
 
   // 6. Pixels & Tráfego Pago
@@ -15390,7 +15559,7 @@ const SEARCH_INDEX = [
     targetId: 'card-expert-events'
   },
 
-  // 7. Perguntas & Qualificação
+  // 7. Perguntas, Critérios & Score de Corte
   {
     id: 'quiz-questions',
     title: 'Perguntas & Respostas do Quiz (Pesos e Knockout)',
@@ -15400,33 +15569,80 @@ const SEARCH_INDEX = [
     keywords: ['perguntas', 'questoes', 'alternativas', 'respostas', 'pilar', 'adicionar pergunta', 'pesos', 'quiz', 'pontuacao'],
     mode: 'advanced',
     tab: 'questions',
-    targetId: 'questions-accordion-container'
+    targetId: 'questions-list-container'
   },
   {
     id: 'quiz-min-score',
     title: 'Nota de Corte Mínima (Score / 100)',
     category: 'Perguntas & Score',
     icon: '🎯',
-    desc: 'Pontuação mínima exigida para qualificar o lead e liberar o botão do WhatsApp.',
-    keywords: ['nota de corte', 'score minimo', 'pontos', 'corte', 'qualificacao', 'minscore', 'criterio'],
+    desc: 'Pontuação mínima exigida para qualificar o lead e liberar o botão do WhatsApp comercial.',
+    keywords: ['nota de corte', 'score minimo', 'pontos', 'corte', 'qualificacao', 'minscore', 'criterio', 'regra de ouro', 'bloqueio comercial'],
     mode: 'advanced',
-    tab: 'company',
+    tab: 'branding',
     targetId: 'cfg-minScore',
     focusInputId: 'cfg-minScore'
+  },
+
+  // 8. Classificação do Lead (v5.7.0: Modo Binário vs Modo Escalonado)
+  {
+    id: 'classification-mode-selector',
+    title: 'Tipo de Classificação do Lead (Binária vs Escalonada)',
+    category: 'Classificação & Resultados',
+    icon: '⚖️',
+    desc: 'Alterne entre o Modo Binário (Qualificado/Não Qualificado) e o Modo Escalonado (4 Faixas de Maturidade).',
+    keywords: ['tipo de classificacao', 'modo binario', 'modo escalonado', 'classificacao do lead', 'binario', 'escalonado', 'faixas de maturidade', 'modelo de resultado', 'classificacao', 'selecao de modo', 'v5.7'],
+    mode: 'advanced',
+    tab: 'branding',
+    targetId: 'section-results-box',
+    focusInputId: 'btn-classification-binary'
+  },
+  {
+    id: 'results-binary-config',
+    title: 'Modo Binário: Qualificado & Não Qualificado',
+    category: 'Classificação & Resultados',
+    icon: '⚖️',
+    desc: 'Personalize diagnósticos, badges de status, mensagens de aprovação/reprovação e botão de WhatsApp.',
+    keywords: ['modo binario', 'qualificado', 'nao qualificado', 'aprovado', 'reprovado', 'binaria', 'diagnostico binario', 'badge qualificado', 'badge reprovado', 'bloqueio comercial', 'aprovacao'],
+    mode: 'advanced',
+    tab: 'branding',
+    targetId: 'container-results-binary'
+  },
+  {
+    id: 'results-tiered-config',
+    title: 'Modo Escalonado: 4 Faixas de Maturidade',
+    category: 'Classificação & Resultados',
+    icon: '📈',
+    desc: 'Configure os 4 estágios de maturidade (Exploração, Oportunidade em Desenvolvimento, Oportunidade e Prioridade).',
+    keywords: ['modo escalonado', 'faixas de maturidade', 'estagios', 'exploracao', 'oportunidade em desenvolvimento', 'oportunidade', 'prioridade', 'tiers', '4 faixas', 'escalonada', 'maturidade', 'diagnostico escalonado', 'faixas de score'],
+    mode: 'advanced',
+    tab: 'branding',
+    targetId: 'container-results-tiered'
+  },
+  {
+    id: 'results-simulation',
+    title: 'Simulador de Resultados & Teste de Faixas no Preview',
+    category: 'Classificação & Resultados',
+    icon: '🧪',
+    desc: 'Simule instantaneamente no preview os resultados (Qualificado 80 / Não Qualificado 35 ou Faixas 25, 55, 75, 95).',
+    keywords: ['simular resultado', 'testar score', 'score 35', 'score 80', 'score 25', 'score 55', 'score 75', 'score 95', 'testar faixa', 'preview resultado', 'simulador', 'teste de tela'],
+    mode: 'advanced',
+    tab: 'branding',
+    targetId: 'section-results-box'
   },
   {
     id: 'quiz-score-tiers',
     title: 'Tiers de Resultado & Selos de Qualificação',
-    category: 'Perguntas & Score',
+    category: 'Classificação & Resultados',
     icon: '🏆',
-    desc: 'Configure os 4 tiers de comunicação: Baixo (Educativo), Médio, Qualificado e Elite.',
-    keywords: ['tiers', 'resultado', 'elite', 'alta prioridade', 'em analise', 'reprovado', 'faixas de score', 'badges', 'copys de resultado'],
+    desc: 'Edite os títulos, badges e textos de cada estágio e faixa de resultado do qualificador.',
+    keywords: ['tiers', 'resultado', 'elite', 'alta prioridade', 'em analise', 'reprovado', 'faixas de score', 'badges', 'copys de resultado', 'estagios'],
     mode: 'advanced',
-    tab: 'styles',
-    targetId: 'tab-styles'
+    tab: 'branding',
+    targetId: 'section-results-box'
   },
 
-  // 8. Marca, Visual & Copy
+  // 9. Marca, Visual & Copy
   {
     id: 'brand-name',
     title: 'Nome Comercial da Marca',
@@ -15435,7 +15651,7 @@ const SEARCH_INDEX = [
     desc: 'Nome fantasia exibido no topo e nas mensagens dinâmicas.',
     keywords: ['nome marca', 'brand name', 'empresa', 'marca', 'nome fantasia'],
     mode: 'advanced',
-    tab: 'company',
+    tab: 'branding',
     targetId: 'cfg-brandName',
     focusInputId: 'cfg-brandName'
   },
@@ -15471,7 +15687,7 @@ const SEARCH_INDEX = [
     desc: 'Texto de impacto na tela de entrada do qualificador.',
     keywords: ['headline', 'titulo capa', 'promessa', 'subheadline', 'subtitulo', 'copy', 'texto capa'],
     mode: 'advanced',
-    tab: 'company',
+    tab: 'branding',
     targetId: 'cfg-headline',
     focusInputId: 'cfg-headline'
   },
@@ -15494,10 +15710,9 @@ const SEARCH_INDEX = [
     desc: 'Conteúdo explicativo e vídeo para leads que não atingiram a nota de corte.',
     keywords: ['drawer', 'diretrizes', 'educativo', 'reprovados', 'consultivo', 'pontos educativos'],
     mode: 'advanced',
-    tab: 'company',
+    tab: 'branding',
     targetId: 'section-drawer-box'
   },
-
   // 9. Integrações, IA & Exportação
   {
     id: 'integration-webhook',
@@ -15507,8 +15722,7 @@ const SEARCH_INDEX = [
     desc: 'Gravação automática de 100% dos leads na planilha ou CRM via Google Apps Script ou n8n.',
     keywords: ['webhook', 'planilha', 'google sheets', 'apps script', 'crm', 'banco de dados', 'integracao', 'n8n', 'zapier'],
     mode: 'expert',
-    targetId: 'card-expert-webhook',
-    focusInputId: 'cfg-tracking-webhook-url'
+    targetId: 'card-expert-webhook'
   },
   {
     id: 'integration-video',
@@ -16960,7 +17174,7 @@ function closePrivacyPreviewModal() {
   document.getElementById('modal-privacy-preview').classList.remove('open');
 }
 
-const GOOGLE_APPS_SCRIPT_TEMPLATE = "/**\n * ============================================================================\n * FNW LST Studio v5.6.4 — Script Master Unificado (CRM de Leads + Publicador LST)\n * ============================================================================\n * SCRIPT DEFINITIVO PARA A SUA PLANILHA GOOGLE DE LEADS & CRM:\n * \n * 1. VIA DE GRAVAÇÃO (doPost):\n *    - Salva os leads do quiz em tempo real na aba \"Leads_LST\" ou \"Leads\".\n *    - Cria cabeçalhos dinâmicos com fundo escuro (#0f172a) e texto em negrito.\n *    - Cria automaticamente uma coluna para CADA PERGUNTA respondida (P1, P2...).\n *    - Salva Score, Status (com cores verde/vermelho), Status_CRM, UTMs e Resumo.\n *    - Suporta publicação de qualificadores direto pelo LST Studio (action: \"publicar_lst\").\n * \n * 2. VIA DE LEITURA & HOSPEDAGEM (doGet):\n *    - Retorna a lista completa de leads para o Painel de CRM & Kanban do Studio.\n *    - Hospeda e exibe a página interativa do qualificador online na nuvem do Google\n *      quando acessado pelo link com ?lst=sua_marca ou link direto.\n * ============================================================================\n */\n\nfunction doPost(e) {\n  try {\n    var raw = (e && e.postData && e.postData.contents) ? e.postData.contents : \"{}\";\n    var data = {};\n    try {\n      data = typeof raw === \"string\" ? JSON.parse(raw) : raw;\n    } catch(err) {\n      data = {};\n    }\n\n    // Mescla parâmetros da URL e campos de formulário (e.parameter) se existirem\n    if (e && e.parameter) {\n      for (var k in e.parameter) {\n        if (!data[k]) data[k] = e.parameter[k];\n      }\n    }\n\n    // Suporte a envio de dados via formulário invisível (campo postData anti-CORS)\n    if (data.postData && typeof data.postData === \"string\") {\n      try {\n        var parsedPost = JSON.parse(data.postData);\n        data = Object.assign(data, parsedPost);\n      } catch(pe) {}\n    }\n\n    var action = (data.action || (e && e.parameter && e.parameter.action) || \"\").trim();\n\n    // ROTA 1: PUBLICAR QUALIFICADOR LST ONLINE\n    if (action === \"publicar_lst\") {\n      return salvarEPublicarLST(data, e);\n    }\n\n    // ROTA 2: GRAVAÇÃO DE LEADS NO CRM (PADRÃO)\n    var ss = SpreadsheetApp.getActiveSpreadsheet();\n    var requestedAba = (data.aba || data.sheet || (e && e.parameter && (e.parameter.aba || e.parameter.sheet)) || \"\").trim();\n    var sheet = obterOuEncontrarAbaLeads(ss, requestedAba) || ss.getActiveSheet();\n    \n    // 1. Extrair mapa de dados dinâmico do lead (com perguntas P1, P2, etc.)\n    var leadMap = extrairMapaDeDados(data);\n    \n    // 2. Se a planilha estiver vazia, cria os cabeçalhos com base no lead\n    if (sheet.getLastRow() === 0) {\n      criarCabecalhosDinamicos(sheet, leadMap);\n    } else {\n      garantirColunasExistentes(sheet, leadMap);\n    }\n    \n    // 3. Monta a linha baseada na ordem real dos cabeçalhos da Linha 1\n    var headerRow = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];\n    var novaLinha = headerRow.map(function(h) {\n      var val = leadMap[h];\n      if (val !== undefined && val !== null) return val;\n      var normH = (h || \"\").toString().toLowerCase().trim();\n      for (var k in leadMap) {\n        if (normH === k.toLowerCase().trim()) return leadMap[k];\n      }\n      return \"\";\n    });\n    \n    sheet.appendRow(novaLinha);\n    var lastRow = sheet.getLastRow();\n    \n    // 4. Formata visualmente a linha (Score e Status com cores de destaque)\n    for (var c = 0; c < headerRow.length; c++) {\n      var hTitle = (headerRow[c] || \"\").toString().toLowerCase();\n      if (hTitle.indexOf(\"status\") >= 0 && hTitle.indexOf(\"crm\") < 0) {\n        var statusCell = sheet.getRange(lastRow, c + 1);\n        if (data.status_qualificacao === \"QUALIFICADO\") {\n          statusCell.setBackground(\"#dcfce7\").setFontColor(\"#15803d\").setFontWeight(\"bold\");\n        } else if ((data.status_qualificacao || \"\").indexOf(\"KNOCKOUT\") >= 0 || (data.status_qualificacao || \"\").indexOf(\"DESQUALIFICADO\") >= 0) {\n          statusCell.setBackground(\"#fee2e2\").setFontColor(\"#b91c1c\").setFontWeight(\"bold\");\n        } else {\n          statusCell.setBackground(\"#f1f5f9\").setFontColor(\"#475569\").setFontWeight(\"bold\");\n        }\n      } else if (hTitle.indexOf(\"score\") >= 0) {\n        sheet.getRange(lastRow, c + 1).setFontWeight(\"bold\").setHorizontalAlignment(\"center\");\n      }\n    }\n    \n    return responderJSON({\n      success: true,\n      row: lastRow,\n      message: \"Lead registrado com sucesso na aba '\" + sheet.getName() + \"'!\"\n    }, e);\n\n  } catch (err) {\n    return responderJSON({ success: false, error: err.message }, e);\n  }\n}\n\nfunction doGet(e) {\n  try {\n    // 1. Se for acesso para visualizar o qualificador publicado na Web\n    if (e && e.parameter && (e.parameter.lst || e.parameter.view === \"lst\")) {\n      return servirHtmlLST(e.parameter.lst || \"ativo\");\n    }\n\n    // 2. Se for requisição para sincronizar leads no Kanban / CRM do Studio\n    var action = (e && e.parameter && e.parameter.action ? e.parameter.action : \"\").trim();\n    if (action === \"obter_leads\") {\n      return obterLeadsDoCRM(e);\n    }\n\n    // 3. Se for acesso direto sem parâmetros no navegador:\n    // Tenta servir o qualificador ativo publicado ou exibe dashboard de status\n    var htmlServido = servirHtmlLST(\"ativo\");\n    if (htmlServido) return htmlServido;\n\n    return responderJSON({\n      success: true,\n      status: \"ativo\",\n      message: \"⚡ Webhook FNW LST Master v5.6.4 ativo e pronto para receber leads!\"\n    }, e);\n\n  } catch (err) {\n    return responderJSON({ success: false, error: err.message }, e);\n  }\n}\n\nfunction obterLeadsDoCRM(e) {\n  var ss = SpreadsheetApp.getActiveSpreadsheet();\n  var requestedAba = (e && e.parameter && (e.parameter.aba || e.parameter.sheet) ? (e.parameter.aba || e.parameter.sheet) : \"\").trim();\n  var sheet = obterOuEncontrarAbaLeads(ss, requestedAba);\n  if (!sheet) {\n    return responderJSON({ success: true, total: 0, leads: [], sheetName: \"\" }, e);\n  }\n\n  var data = sheet.getDataRange().getValues();\n  if (!data || data.length === 0) {\n    return responderJSON({ success: true, total: 0, leads: [], sheetName: sheet.getName() }, e);\n  }\n\n  var row0 = data[0] || [];\n  var isRow1Data = false;\n  for (var c = 0; c < row0.length; c++) {\n    var cellVal = String(row0[c] || \"\").trim();\n    if (cellVal.indexOf(\"@\") >= 0 && cellVal.indexOf(\".\") >= 0) { isRow1Data = true; break; }\n    var digits = cellVal.replace(/\\D/g, \"\");\n    if (digits.length >= 9 && digits.length <= 13) { isRow1Data = true; break; }\n    if (row0[c] instanceof Date) { isRow1Data = true; break; }\n  }\n\n  if (data.length === 1 && !isRow1Data) {\n    return responderJSON({ success: true, total: 0, leads: [], sheetName: sheet.getName() }, e);\n  }\n\n  var colData = -1, colNome = -1, colWhats = -1, colEmail = -1, colEmpresa = -1;\n  var colScore = -1, colStatus = -1, colMotivo = -1, colLocal = -1, colSeg = -1;\n  var colFat = -1, colCrm = -1;\n  var startRow = 1;\n\n  if (isRow1Data) {\n    startRow = 0;\n    for (var ci = 0; ci < row0.length; ci++) {\n      var str = String(row0[ci] || \"\").trim();\n      var numDigits = str.replace(/\\D/g, \"\");\n      if (colEmail < 0 && str.indexOf(\"@\") >= 0) colEmail = ci;\n      else if (colWhats < 0 && numDigits.length >= 8 && numDigits.length <= 13) colWhats = ci;\n      else if (colData < 0 && (row0[ci] instanceof Date || /^\\d{2}\\/\\d{2}\\/\\d{4}/.test(str))) colData = ci;\n      else if (colScore < 0 && !isNaN(Number(str)) && Number(str) >= 0 && Number(str) <= 100 && str.length <= 3) colScore = ci;\n      else if (colNome < 0 && str.length >= 3 && isNaN(Number(str))) colNome = ci;\n    }\n  } else {\n    var headers = row0.map(function(h) { return (h || \"\").toString().toLowerCase().trim(); });\n    var findCol = function(keywords) {\n      for (var i = 0; i < headers.length; i++) {\n        for (var k = 0; k < keywords.length; k++) {\n          if (headers[i].indexOf(keywords[k]) >= 0) return i;\n        }\n      }\n      return -1;\n    };\n\n    colData = findCol([\"data\", \"timestamp\", \"hora\", \"date\", \"horário\"]);\n    colNome = findCol([\"nome\", \"name\", \"contato\", \"cliente\", \"lead\", \"pessoa\"]);\n    colWhats = findCol([\"whats\", \"tel\", \"cel\", \"phone\", \"fone\", \"telefone\", \"whatsapp\", \"celular\"]);\n    colEmail = findCol([\"email\", \"e-mail\", \"mail\", \"correio\"]);\n    colEmpresa = findCol([\"empresa\", \"company\", \"clínica\", \"clinica\", \"negócio\", \"negocio\", \"consultório\", \"consultorio\", \"imobiliária\", \"imobiliaria\"]);\n    colScore = findCol([\"score\", \"pontos\", \"nota\", \"pontuacao\", \"pontuação\"]);\n    colStatus = findCol([\"status_qualificacao\", \"qualificacao\", \"qualifica\", \"status\", \"resultado\", \"classificação\", \"classificacao\"]);\n    colMotivo = findCol([\"knockout\", \"motivo\", \"desqual\", \"descarte\", \"rejeição\"]);\n    colLocal = findCol([\"local\", \"cidade\", \"uf\", \"estado\", \"regiao\", \"região\"]);\n    colSeg = findCol([\"segmento\", \"nicho\", \"setor\", \"ramo\", \"área\", \"area\"]);\n    colFat = findCol([\"faturamento\", \"receita\", \"fatur\", \"porte\", \"faixa\"]);\n    colCrm = findCol([\"status_crm\", \"crm\", \"etapa\", \"fase\", \"funil\"]);\n  }\n\n  var leads = [];\n  for (var rowIdx = startRow; rowIdx < data.length; rowIdx++) {\n    var r = data[rowIdx];\n    if (!r || r.every(function(cell) { return cell === \"\" || cell === null || cell === undefined; })) continue;\n\n    var rawWhats = colWhats >= 0 ? String(r[colWhats] || \"\") : \"\";\n    var cleanWhats = rawWhats.replace(/\\D/g, \"\");\n    var rawScore = colScore >= 0 ? parseInt(r[colScore], 10) : 0;\n    var scoreVal = !isNaN(rawScore) ? rawScore : 0;\n    var rawStatus = colStatus >= 0 ? String(r[colStatus] || \"\") : (scoreVal >= 60 ? \"QUALIFICADO\" : \"DESQUALIFICADO\");\n\n    leads.push({\n      id: \"lead_\" + (rowIdx + 1) + \"_\" + (cleanWhats ? cleanWhats.slice(-6) : (rowIdx + 1)),\n      rowIndex: rowIdx + 1,\n      dataHora: colData >= 0 && r[colData] ? String(r[colData]) : \"\",\n      nome: colNome >= 0 && r[colNome] ? String(r[colNome]) : (\"Lead #\" + (rowIdx + 1)),\n      whatsapp: rawWhats,\n      email: colEmail >= 0 ? String(r[colEmail] || \"\") : \"\",\n      empresa: colEmpresa >= 0 ? String(r[colEmpresa] || \"\") : \"\",\n      score: scoreVal,\n      statusQualificacao: rawStatus,\n      knockoutMotivo: colMotivo >= 0 ? String(r[colMotivo] || \"\") : \"\",\n      localizacao: colLocal >= 0 ? String(r[colLocal] || \"\") : \"\",\n      segmento: colSeg >= 0 ? String(r[colSeg] || \"\") : \"\",\n      faturamento: colFat >= 0 ? String(r[colFat] || \"\") : \"\",\n      statusCrm: colCrm >= 0 && r[colCrm] ? String(r[colCrm]).toLowerCase() : \"novo\"\n    });\n  }\n\n  return responderJSON({\n    success: true,\n    status: \"ativo\",\n    total: leads.length,\n    sheetName: sheet.getName(),\n    leads: leads,\n    message: \"⚡ Webhook FNW LST Master v5.6.4 ativo! \" + leads.length + \" leads lidos na aba '\" + sheet.getName() + \"'.\"\n  }, e);\n}\n\nfunction obterOuEncontrarAbaLeads(ss, requestedName) {\n  if (!ss) return null;\n  \n  // 1. Se foi solicitada uma aba específica por parâmetro:\n  if (requestedName) {\n    var requested = ss.getSheetByName(requestedName);\n    if (requested) return requested;\n  }\n\n  // 2. Abas prioritárias canônicas de leads\n  var canonical = ss.getSheetByName(\"Leads_LST\") || ss.getSheetByName(\"Leads\");\n  if (canonical) return canonical;\n\n  var sheets = ss.getSheets();\n  if (!sheets || sheets.length === 0) return null;\n  if (sheets.length === 1) return sheets[0];\n\n  // Abas de sistema que NUNCA contêm leads\n  var systemTabs = [\"_lst_storage_\", \"acessos\", \"config\", \"configuracoes\", \"usuarios\", \"users\", \"logs\"];\n\n  // 3. Busca abas cujo nome contenha \"lead\", \"resposta\" ou \"form\"\n  for (var i = 0; i < sheets.length; i++) {\n    var nameLower = sheets[i].getName().toLowerCase().trim();\n    if (systemTabs.indexOf(nameLower) >= 0) continue;\n    if (nameLower.indexOf(\"lead\") >= 0 || nameLower.indexOf(\"resposta\") >= 0 || nameLower.indexOf(\"form\") >= 0) {\n      return sheets[i];\n    }\n  }\n\n  // 4. Candidatas com dados (> 1 linha) excluindo abas de sistema\n  var candidatasComDados = [];\n  for (var j = 0; j < sheets.length; j++) {\n    var sh = sheets[j];\n    var sName = sh.getName().toLowerCase().trim();\n    if (systemTabs.indexOf(sName) >= 0) continue;\n    if (sh.getLastRow() > 1) {\n      candidatasComDados.push(sh);\n    }\n  }\n\n  if (candidatasComDados.length === 1) return candidatasComDados[0];\n\n  if (candidatasComDados.length > 1) {\n    candidatasComDados.sort(function(a, b) { return b.getLastRow() - a.getLastRow(); });\n    return candidatasComDados[0];\n  }\n\n  // 5. Retorna a primeira aba que não seja de sistema\n  for (var k = 0; k < sheets.length; k++) {\n    var kName = sheets[k].getName().toLowerCase().trim();\n    if (systemTabs.indexOf(kName) < 0) {\n      return sheets[k];\n    }\n  }\n\n  return sheets[0];\n}\n\nfunction encontrarAbaDeLeads(ss, requestedName) {\n  return obterOuEncontrarAbaLeads(ss, requestedName);\n}\n\nfunction extrairMapaDeDados(data) {\n  var map = {};\n  map[\"Data/Hora\"] = Utilities.formatDate(new Date(), \"GMT-3\", \"dd/MM/yyyy HH:mm:ss\");\n  \n  if (data.nome) map[\"Nome do Lead\"] = data.nome;\n  if (data.whatsapp) map[\"WhatsApp\"] = data.whatsapp;\n  if (data.email) map[\"E-mail\"] = data.email;\n  if (data.localizacao) map[\"Localização (IBGE)\"] = data.localizacao;\n  if (data.empresa) map[\"Empresa\"] = data.empresa;\n  if (data.segmento || data.tipo_negocio) map[\"Segmento\"] = data.segmento || data.tipo_negocio;\n  if (data.faturamento) map[\"Faturamento\"] = data.faturamento;\n  if (data.instagram) map[\"Instagram\"] = data.instagram;\n  if (data.site) map[\"Site\"] = data.site;\n  \n  if (data.campos_customizados && Array.isArray(data.campos_customizados)) {\n    data.campos_customizados.forEach(function(cf) {\n      if (cf.label && cf.valor) {\n        map[cf.label] = cf.valor;\n      }\n    });\n  }\n  \n  map[\"Score (0-100)\"] = data.score !== undefined ? data.score : 0;\n  map[\"Status\"] = data.status_qualificacao || \"\";\n  if (data.knockout_motivo) map[\"Motivo Knockout\"] = data.knockout_motivo;\n  \n  var utms = data.utms || {};\n  if (utms.utm_source || data.utm_source) map[\"UTM Source\"] = utms.utm_source || data.utm_source;\n  if (utms.utm_campaign || data.utm_campaign) map[\"UTM Campaign\"] = utms.utm_campaign || data.utm_campaign;\n  if (utms.utm_medium || data.utm_medium) map[\"UTM Medium\"] = utms.utm_medium || data.utm_medium;\n  \n  // Extrai todas as perguntas respondidas para colunas dedicadas\n  var respostas = data.respostas || [];\n  var resumoGeral = [];\n  respostas.forEach(function(r, i) {\n    var pilarTxt = r.pilar ? \"[\" + r.pilar + \"] \" : \"\";\n    var perguntaTxt = r.pergunta || r.question || (\"Pergunta \" + (i + 1));\n    var respostaTxt = (r.txt || r.text || r.resposta || \"\") + \" (\" + (r.score !== undefined ? r.score : 0) + \" pts)\";\n    var pHeader = \"P\" + (i + 1) + \": \" + pilarTxt + perguntaTxt;\n    map[pHeader] = respostaTxt;\n    resumoGeral.push(\"P\" + (i + 1) + \". \" + pilarTxt + perguntaTxt + \"\\n➜ Resposta: \" + respostaTxt);\n  });\n  \n  map[\"Resumo Geral\"] = resumoGeral.join(\"\\n\\n\");\n  map[\"Status_CRM\"] = (data.status_crm || \"novo\").toLowerCase();\n  return map;\n}\n\nfunction criarCabecalhosDinamicos(sheet, leadMap) {\n  var headers = Object.keys(leadMap);\n  sheet.appendRow(headers);\n  var headerRange = sheet.getRange(1, 1, 1, headers.length);\n  headerRange.setBackground(\"#0f172a\")\n             .setFontColor(\"#ffffff\")\n             .setFontWeight(\"bold\")\n             .setFontSize(10)\n             .setHorizontalAlignment(\"center\")\n             .setWrap(true);\n  sheet.setFrozenRows(1);\n  sheet.setRowHeight(1, 45);\n}\n\nfunction garantirColunasExistentes(sheet, leadMap) {\n  var lastCol = sheet.getLastColumn();\n  if (lastCol === 0) return;\n  var existingHeaders = sheet.getRange(1, 1, 1, lastCol).getValues()[0];\n  var existingMap = {};\n  existingHeaders.forEach(function(h) { existingMap[(h || \"\").toString().toLowerCase().trim()] = true; });\n  \n  var novasColunas = [];\n  for (var k in leadMap) {\n    if (k === \"Resumo Geral\") continue;\n    if (!existingMap[k.toLowerCase().trim()]) {\n      novasColunas.push(k);\n    }\n  }\n  \n  if (novasColunas.length > 0) {\n    novasColunas.forEach(function(nc) {\n      sheet.insertColumnBefore(lastCol);\n      sheet.getRange(1, lastCol).setValue(nc)\n           .setBackground(\"#0f172a\")\n           .setFontColor(\"#ffffff\")\n           .setFontWeight(\"bold\")\n           .setFontSize(10)\n           .setHorizontalAlignment(\"center\")\n           .setWrap(true);\n      lastCol++;\n    });\n  }\n}\n\n// ============================================================================\n// HOSPEDAGEM & PUBLICAÇÃO DE QUALIFICADORES LST (HTML DIRETO NA NUVEM)\n// ============================================================================\n\nfunction salvarEPublicarLST(params, e) {\n  try {\n    var htmlContent = (params.htmlContent || params.html || \"\").trim();\n    if (!htmlContent) {\n      return responderJSON({ success: false, message: \"Conteúdo HTML não informado para publicação.\" }, e);\n    }\n\n    var lstId = (params.lstId || params.slug || \"ativo\").toLowerCase().replace(/[^a-z0-9_-]/g, \"\");\n    var fileName = \"lst_publicado_\" + lstId + \".html\";\n\n    var file = null;\n    try {\n      var files = DriveApp.getFilesByName(fileName);\n      var updated = 0;\n      while (files.hasNext()) {\n        file = files.next();\n        file.setContent(htmlContent);\n        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);\n        updated++;\n      }\n      if (updated === 0) {\n        file = DriveApp.createFile(fileName, htmlContent, MimeType.HTML);\n        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);\n      }\n    } catch(driveErr) {}\n\n    // Sempre salva redundante na aba oculta _LST_STORAGE_ da planilha\n    salvarHtmlNaAba(lstId, htmlContent);\n\n    var webAppUrl = ScriptApp.getService().getUrl() || \"\";\n    var liveUrl = webAppUrl ? (webAppUrl + (webAppUrl.indexOf(\"?\") >= 0 ? \"&\" : \"?\") + \"lst=\" + encodeURIComponent(lstId)) : (file ? file.getUrl() : \"\");\n\n    return responderJSON({\n      success: true,\n      url: liveUrl,\n      lstId: lstId,\n      message: \"Qualificador LST publicado com sucesso no Google Apps Script!\"\n    }, e);\n  } catch (err) {\n    return responderJSON({ success: false, message: \"Erro ao publicar LST: \" + err.toString() }, e);\n  }\n}\n\nfunction salvarHtmlNaAba(lstId, htmlContent) {\n  try {\n    var ss = SpreadsheetApp.getActiveSpreadsheet();\n    var sheet = ss.getSheetByName(\"_LST_STORAGE_\");\n    if (!sheet) {\n      sheet = ss.insertSheet(\"_LST_STORAGE_\");\n      sheet.appendRow([\"ID\", \"HTML_BASE64\", \"Atualizado_Em\"]);\n      try { sheet.hideSheet(); } catch(he) {}\n    }\n    var base64 = Utilities.base64Encode(Utilities.newBlob(htmlContent).getBytes());\n    sheet.appendRow([lstId, base64, Utilities.formatDate(new Date(), \"GMT-3\", \"dd/MM/yyyy HH:mm:ss\")]);\n    var webAppUrl = ScriptApp.getService().getUrl() || \"\";\n    var liveUrl = webAppUrl ? (webAppUrl + (webAppUrl.indexOf(\"?\") >= 0 ? \"&\" : \"?\") + \"lst=\" + encodeURIComponent(lstId)) : \"\";\n    return {\n      success: true,\n      url: liveUrl,\n      lstId: lstId,\n      message: \"Qualificador salvo com sucesso na planilha!\"\n    };\n  } catch(e) {\n    return { success: false, message: \"Erro no armazenamento: \" + e.toString() };\n  }\n}\n\nfunction servirHtmlLST(lstId) {\n  try {\n    var cleanId = (lstId || \"ativo\").toLowerCase().replace(/[^a-z0-9_-]/g, \"\");\n    var fileName = \"lst_publicado_\" + cleanId + \".html\";\n\n    // 1. Prioridade: busca na aba de armazenamento oculta _LST_STORAGE_ (mais recente primeiro)\n    var ss = SpreadsheetApp.getActiveSpreadsheet();\n    var sheet = ss.getSheetByName(\"_LST_STORAGE_\");\n    if (sheet) {\n      var data = sheet.getDataRange().getValues();\n      for (var i = data.length - 1; i >= 1; i--) {\n        if ((data[i][0] === cleanId || cleanId === \"ativo\" || !cleanId) && data[i][1]) {\n          var bytes = Utilities.base64Decode(data[i][1]);\n          var content = Utilities.newBlob(bytes).getDataAsString();\n          return HtmlService.createHtmlOutput(content)\n            .setTitle(\"Qualificador LST\")\n            .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)\n            .addMetaTag(\"viewport\", \"width=device-width, initial-scale=1.0\");\n        }\n      }\n    }\n\n    // 2. Fallback no Google Drive\n    try {\n      var files = DriveApp.getFilesByName(fileName);\n      if (files.hasNext()) {\n        var content = files.next().getBlob().getDataAsString();\n        return HtmlService.createHtmlOutput(content)\n          .setTitle(\"Qualificador LST\")\n          .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)\n          .addMetaTag(\"viewport\", \"width=device-width, initial-scale=1.0\");\n      }\n    } catch(driveErr) {}\n  } catch(e) {}\n\n  return HtmlService.createHtmlOutput(\n    \"<div style='font-family:system-ui,-apple-system,sans-serif;padding:50px 20px;text-align:center;background:#090d16;color:#f1f5f9;min-height:100vh;box-sizing:border-box;'>\" +\n    \"<div style='max-width:520px;margin:30px auto;background:#111827;padding:36px;border-radius:20px;border:1px solid #1f2937;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);'>\" +\n    \"<div style='font-size:36px;margin-bottom:12px;'>⚡</div>\" +\n    \"<h2 style='color:#38bdf8;margin:0 0 8px 0;font-size:22px;font-weight:800;'>FNW LST Webhook Master v5.6.4</h2>\" +\n    \"<p style='color:#94a3b8;font-size:14px;line-height:1.6;margin-bottom:20px;'>O Webhook e CRM estão <strong style='color:#34d399;'>ONLINE e 100% ativos</strong> nesta planilha!</p>\" +\n    \"<div style='background:#1f2937;padding:14px;border-radius:12px;border:1px solid #374151;text-align:left;font-size:12px;color:#cbd5e1;line-height:1.5;'>\" +\n    \"<div>✓ <strong>Receptor de Leads:</strong> Ativo</div>\" +\n    \"<div>✓ <strong>Sincronização de CRM:</strong> Ativa</div>\" +\n    \"<div>✓ <strong>Hospedagem Web:</strong> Ativa</div>\" +\n    \"</div>\" +\n    \"<p style='color:#64748b;font-size:11px;margin-top:20px;'>Para ver um qualificador aqui, publique através do Studio ou adicione <code>?lst=sua_marca</code> na URL.</p>\" +\n    \"</div></div>\"\n  ).setTitle(\"FNW LST Master Webhook\");\n}\n\nfunction responderJSON(objeto, e) {\n  var callback = (e && e.parameter && (e.parameter.callback || e.parameter.prefix));\n  if (callback) {\n    return ContentService.createTextOutput(callback + \"(\" + JSON.stringify(objeto) + \")\")\n      .setMimeType(ContentService.MimeType.JAVASCRIPT);\n  }\n  return ContentService.createTextOutput(JSON.stringify(objeto))\n    .setMimeType(ContentService.MimeType.JSON);\n}\n";
+const GOOGLE_APPS_SCRIPT_TEMPLATE = "/**\n * ============================================================================\n * FNW LST Studio v5.7.0 — Script Master Unificado (CRM de Leads + Publicador LST)\n * ============================================================================\n * SCRIPT DEFINITIVO PARA A SUA PLANILHA GOOGLE DE LEADS & CRM:\n * \n * 1. VIA DE GRAVAÇÃO (doPost):\n *    - Salva os leads do quiz em tempo real na aba \"Leads_LST\" ou \"Leads\".\n *    - Cria cabeçalhos dinâmicos com fundo escuro (#0f172a) e texto em negrito.\n *    - Cria automaticamente uma coluna para CADA PERGUNTA respondida (P1, P2...).\n *    - Salva Score, Status (com cores verde/vermelho), Status_CRM, UTMs e Resumo.\n *    - Suporta publicação de qualificadores direto pelo LST Studio (action: \"publicar_lst\").\n * \n * 2. VIA DE LEITURA & HOSPEDAGEM (doGet):\n *    - Retorna a lista completa de leads para o Painel de CRM & Kanban do Studio.\n *    - Hospeda e exibe a página interativa do qualificador online na nuvem do Google\n *      quando acessado pelo link com ?lst=sua_marca ou link direto.\n * ============================================================================\n */\n\nfunction doPost(e) {\n  try {\n    var raw = (e && e.postData && e.postData.contents) ? e.postData.contents : \"{}\";\n    var data = {};\n    try {\n      data = typeof raw === \"string\" ? JSON.parse(raw) : raw;\n    } catch(err) {\n      data = {};\n    }\n\n    // Mescla parâmetros da URL e campos de formulário (e.parameter) se existirem\n    if (e && e.parameter) {\n      for (var k in e.parameter) {\n        if (!data[k]) data[k] = e.parameter[k];\n      }\n    }\n\n    // Suporte a envio de dados via formulário invisível (campo postData anti-CORS)\n    if (data.postData && typeof data.postData === \"string\") {\n      try {\n        var parsedPost = JSON.parse(data.postData);\n        data = Object.assign(data, parsedPost);\n      } catch(pe) {}\n    }\n\n    var action = (data.action || (e && e.parameter && e.parameter.action) || \"\").trim();\n\n    // ROTA 1: PUBLICAR QUALIFICADOR LST ONLINE\n    if (action === \"publicar_lst\") {\n      return salvarEPublicarLST(data, e);\n    }\n\n    // ROTA 2: GRAVAÇÃO DE LEADS NO CRM (PADRÃO)\n    var ss = SpreadsheetApp.getActiveSpreadsheet();\n    var requestedAba = (data.aba || data.sheet || (e && e.parameter && (e.parameter.aba || e.parameter.sheet)) || \"\").trim();\n    var sheet = obterOuEncontrarAbaLeads(ss, requestedAba) || ss.getActiveSheet();\n    \n    // 1. Extrair mapa de dados dinâmico do lead (com perguntas P1, P2, etc.)\n    var leadMap = extrairMapaDeDados(data);\n    \n    // 2. Se a planilha estiver vazia, cria os cabeçalhos com base no lead\n    if (sheet.getLastRow() === 0) {\n      criarCabecalhosDinamicos(sheet, leadMap);\n    } else {\n      garantirColunasExistentes(sheet, leadMap);\n    }\n    \n    // 3. Monta a linha baseada na ordem real dos cabeçalhos da Linha 1\n    var headerRow = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];\n    var novaLinha = headerRow.map(function(h) {\n      var val = leadMap[h];\n      if (val !== undefined && val !== null) return val;\n      var normH = (h || \"\").toString().toLowerCase().trim();\n      for (var k in leadMap) {\n        if (normH === k.toLowerCase().trim()) return leadMap[k];\n      }\n      return \"\";\n    });\n    \n    sheet.appendRow(novaLinha);\n    var lastRow = sheet.getLastRow();\n    \n    // 4. Formata visualmente a linha (Score e Status com cores de destaque)\n    for (var c = 0; c < headerRow.length; c++) {\n      var hTitle = (headerRow[c] || \"\").toString().toLowerCase();\n      if (hTitle.indexOf(\"status\") >= 0 && hTitle.indexOf(\"crm\") < 0) {\n        var statusCell = sheet.getRange(lastRow, c + 1);\n        if (data.status_qualificacao === \"QUALIFICADO\") {\n          statusCell.setBackground(\"#dcfce7\").setFontColor(\"#15803d\").setFontWeight(\"bold\");\n        } else if ((data.status_qualificacao || \"\").indexOf(\"KNOCKOUT\") >= 0 || (data.status_qualificacao || \"\").indexOf(\"DESQUALIFICADO\") >= 0) {\n          statusCell.setBackground(\"#fee2e2\").setFontColor(\"#b91c1c\").setFontWeight(\"bold\");\n        } else {\n          statusCell.setBackground(\"#f1f5f9\").setFontColor(\"#475569\").setFontWeight(\"bold\");\n        }\n      } else if (hTitle.indexOf(\"score\") >= 0) {\n        sheet.getRange(lastRow, c + 1).setFontWeight(\"bold\").setHorizontalAlignment(\"center\");\n      }\n    }\n    \n    return responderJSON({\n      success: true,\n      row: lastRow,\n      message: \"Lead registrado com sucesso na aba '\" + sheet.getName() + \"'!\"\n    }, e);\n\n  } catch (err) {\n    return responderJSON({ success: false, error: err.message }, e);\n  }\n}\n\nfunction doGet(e) {\n  try {\n    // 1. Se for acesso para visualizar o qualificador publicado na Web\n    if (e && e.parameter && (e.parameter.lst || e.parameter.view === \"lst\")) {\n      return servirHtmlLST(e.parameter.lst || \"ativo\");\n    }\n\n    // 2. Se for requisição para sincronizar leads no Kanban / CRM do Studio\n    var action = (e && e.parameter && e.parameter.action ? e.parameter.action : \"\").trim();\n    if (action === \"obter_leads\") {\n      return obterLeadsDoCRM(e);\n    }\n\n    // 3. Se for acesso direto sem parâmetros no navegador:\n    // Tenta servir o qualificador ativo publicado ou exibe dashboard de status\n    var htmlServido = servirHtmlLST(\"ativo\");\n    if (htmlServido) return htmlServido;\n\n    return responderJSON({\n      success: true,\n      status: \"ativo\",\n      message: \"⚡ Webhook FNW LST Master v5.7.0 ativo e pronto para receber leads!\"\n    }, e);\n\n  } catch (err) {\n    return responderJSON({ success: false, error: err.message }, e);\n  }\n}\n\nfunction obterLeadsDoCRM(e) {\n  var ss = SpreadsheetApp.getActiveSpreadsheet();\n  var requestedAba = (e && e.parameter && (e.parameter.aba || e.parameter.sheet) ? (e.parameter.aba || e.parameter.sheet) : \"\").trim();\n  var sheet = obterOuEncontrarAbaLeads(ss, requestedAba);\n  if (!sheet) {\n    return responderJSON({ success: true, total: 0, leads: [], sheetName: \"\" }, e);\n  }\n\n  var data = sheet.getDataRange().getValues();\n  if (!data || data.length === 0) {\n    return responderJSON({ success: true, total: 0, leads: [], sheetName: sheet.getName() }, e);\n  }\n\n  var row0 = data[0] || [];\n  var isRow1Data = false;\n  for (var c = 0; c < row0.length; c++) {\n    var cellVal = String(row0[c] || \"\").trim();\n    if (cellVal.indexOf(\"@\") >= 0 && cellVal.indexOf(\".\") >= 0) { isRow1Data = true; break; }\n    var digits = cellVal.replace(/\\D/g, \"\");\n    if (digits.length >= 9 && digits.length <= 13) { isRow1Data = true; break; }\n    if (row0[c] instanceof Date) { isRow1Data = true; break; }\n  }\n\n  if (data.length === 1 && !isRow1Data) {\n    return responderJSON({ success: true, total: 0, leads: [], sheetName: sheet.getName() }, e);\n  }\n\n  var colData = -1, colNome = -1, colWhats = -1, colEmail = -1, colEmpresa = -1;\n  var colScore = -1, colStatus = -1, colMotivo = -1, colLocal = -1, colSeg = -1;\n  var colFat = -1, colCrm = -1;\n  var startRow = 1;\n\n  if (isRow1Data) {\n    startRow = 0;\n    for (var ci = 0; ci < row0.length; ci++) {\n      var str = String(row0[ci] || \"\").trim();\n      var numDigits = str.replace(/\\D/g, \"\");\n      if (colEmail < 0 && str.indexOf(\"@\") >= 0) colEmail = ci;\n      else if (colWhats < 0 && numDigits.length >= 8 && numDigits.length <= 13) colWhats = ci;\n      else if (colData < 0 && (row0[ci] instanceof Date || /^\\d{2}\\/\\d{2}\\/\\d{4}/.test(str))) colData = ci;\n      else if (colScore < 0 && !isNaN(Number(str)) && Number(str) >= 0 && Number(str) <= 100 && str.length <= 3) colScore = ci;\n      else if (colNome < 0 && str.length >= 3 && isNaN(Number(str))) colNome = ci;\n    }\n  } else {\n    var headers = row0.map(function(h) { return (h || \"\").toString().toLowerCase().trim(); });\n    var findCol = function(keywords) {\n      for (var i = 0; i < headers.length; i++) {\n        for (var k = 0; k < keywords.length; k++) {\n          if (headers[i].indexOf(keywords[k]) >= 0) return i;\n        }\n      }\n      return -1;\n    };\n\n    colData = findCol([\"data\", \"timestamp\", \"hora\", \"date\", \"horário\"]);\n    colNome = findCol([\"nome\", \"name\", \"contato\", \"cliente\", \"lead\", \"pessoa\"]);\n    colWhats = findCol([\"whats\", \"tel\", \"cel\", \"phone\", \"fone\", \"telefone\", \"whatsapp\", \"celular\"]);\n    colEmail = findCol([\"email\", \"e-mail\", \"mail\", \"correio\"]);\n    colEmpresa = findCol([\"empresa\", \"company\", \"clínica\", \"clinica\", \"negócio\", \"negocio\", \"consultório\", \"consultorio\", \"imobiliária\", \"imobiliaria\"]);\n    colScore = findCol([\"score\", \"pontos\", \"nota\", \"pontuacao\", \"pontuação\"]);\n    colStatus = findCol([\"status_qualificacao\", \"qualificacao\", \"qualifica\", \"status\", \"resultado\", \"classificação\", \"classificacao\"]);\n    colMotivo = findCol([\"knockout\", \"motivo\", \"desqual\", \"descarte\", \"rejeição\"]);\n    colLocal = findCol([\"local\", \"cidade\", \"uf\", \"estado\", \"regiao\", \"região\"]);\n    colSeg = findCol([\"segmento\", \"nicho\", \"setor\", \"ramo\", \"área\", \"area\"]);\n    colFat = findCol([\"faturamento\", \"receita\", \"fatur\", \"porte\", \"faixa\"]);\n    colCrm = findCol([\"status_crm\", \"crm\", \"etapa\", \"fase\", \"funil\"]);\n  }\n\n  var leads = [];\n  for (var rowIdx = startRow; rowIdx < data.length; rowIdx++) {\n    var r = data[rowIdx];\n    if (!r || r.every(function(cell) { return cell === \"\" || cell === null || cell === undefined; })) continue;\n\n    var rawWhats = colWhats >= 0 ? String(r[colWhats] || \"\") : \"\";\n    var cleanWhats = rawWhats.replace(/\\D/g, \"\");\n    var rawScore = colScore >= 0 ? parseInt(r[colScore], 10) : 0;\n    var scoreVal = !isNaN(rawScore) ? rawScore : 0;\n    var rawStatus = colStatus >= 0 ? String(r[colStatus] || \"\") : (scoreVal >= 60 ? \"QUALIFICADO\" : \"DESQUALIFICADO\");\n\n    leads.push({\n      id: \"lead_\" + (rowIdx + 1) + \"_\" + (cleanWhats ? cleanWhats.slice(-6) : (rowIdx + 1)),\n      rowIndex: rowIdx + 1,\n      dataHora: colData >= 0 && r[colData] ? String(r[colData]) : \"\",\n      nome: colNome >= 0 && r[colNome] ? String(r[colNome]) : (\"Lead #\" + (rowIdx + 1)),\n      whatsapp: rawWhats,\n      email: colEmail >= 0 ? String(r[colEmail] || \"\") : \"\",\n      empresa: colEmpresa >= 0 ? String(r[colEmpresa] || \"\") : \"\",\n      score: scoreVal,\n      statusQualificacao: rawStatus,\n      knockoutMotivo: colMotivo >= 0 ? String(r[colMotivo] || \"\") : \"\",\n      localizacao: colLocal >= 0 ? String(r[colLocal] || \"\") : \"\",\n      segmento: colSeg >= 0 ? String(r[colSeg] || \"\") : \"\",\n      faturamento: colFat >= 0 ? String(r[colFat] || \"\") : \"\",\n      statusCrm: colCrm >= 0 && r[colCrm] ? String(r[colCrm]).toLowerCase() : \"novo\"\n    });\n  }\n\n  return responderJSON({\n    success: true,\n    status: \"ativo\",\n    total: leads.length,\n    sheetName: sheet.getName(),\n    leads: leads,\n    message: \"⚡ Webhook FNW LST Master v5.7.0 ativo! \" + leads.length + \" leads lidos na aba '\" + sheet.getName() + \"'.\"\n  }, e);\n}\n\nfunction obterOuEncontrarAbaLeads(ss, requestedName) {\n  if (!ss) return null;\n  \n  // 1. Se foi solicitada uma aba específica por parâmetro:\n  if (requestedName) {\n    var requested = ss.getSheetByName(requestedName);\n    if (requested) return requested;\n  }\n\n  // 2. Abas prioritárias canônicas de leads\n  var canonical = ss.getSheetByName(\"Leads_LST\") || ss.getSheetByName(\"Leads\");\n  if (canonical) return canonical;\n\n  var sheets = ss.getSheets();\n  if (!sheets || sheets.length === 0) return null;\n  if (sheets.length === 1) return sheets[0];\n\n  // Abas de sistema que NUNCA contêm leads\n  var systemTabs = [\"_lst_storage_\", \"acessos\", \"config\", \"configuracoes\", \"usuarios\", \"users\", \"logs\"];\n\n  // 3. Busca abas cujo nome contenha \"lead\", \"resposta\" ou \"form\"\n  for (var i = 0; i < sheets.length; i++) {\n    var nameLower = sheets[i].getName().toLowerCase().trim();\n    if (systemTabs.indexOf(nameLower) >= 0) continue;\n    if (nameLower.indexOf(\"lead\") >= 0 || nameLower.indexOf(\"resposta\") >= 0 || nameLower.indexOf(\"form\") >= 0) {\n      return sheets[i];\n    }\n  }\n\n  // 4. Candidatas com dados (> 1 linha) excluindo abas de sistema\n  var candidatasComDados = [];\n  for (var j = 0; j < sheets.length; j++) {\n    var sh = sheets[j];\n    var sName = sh.getName().toLowerCase().trim();\n    if (systemTabs.indexOf(sName) >= 0) continue;\n    if (sh.getLastRow() > 1) {\n      candidatasComDados.push(sh);\n    }\n  }\n\n  if (candidatasComDados.length === 1) return candidatasComDados[0];\n\n  if (candidatasComDados.length > 1) {\n    candidatasComDados.sort(function(a, b) { return b.getLastRow() - a.getLastRow(); });\n    return candidatasComDados[0];\n  }\n\n  // 5. Retorna a primeira aba que não seja de sistema\n  for (var k = 0; k < sheets.length; k++) {\n    var kName = sheets[k].getName().toLowerCase().trim();\n    if (systemTabs.indexOf(kName) < 0) {\n      return sheets[k];\n    }\n  }\n\n  return sheets[0];\n}\n\nfunction encontrarAbaDeLeads(ss, requestedName) {\n  return obterOuEncontrarAbaLeads(ss, requestedName);\n}\n\nfunction extrairMapaDeDados(data) {\n  var map = {};\n  map[\"Data/Hora\"] = Utilities.formatDate(new Date(), \"GMT-3\", \"dd/MM/yyyy HH:mm:ss\");\n  \n  if (data.nome) map[\"Nome do Lead\"] = data.nome;\n  if (data.whatsapp) map[\"WhatsApp\"] = data.whatsapp;\n  if (data.email) map[\"E-mail\"] = data.email;\n  if (data.localizacao) map[\"Localização (IBGE)\"] = data.localizacao;\n  if (data.empresa) map[\"Empresa\"] = data.empresa;\n  if (data.segmento || data.tipo_negocio) map[\"Segmento\"] = data.segmento || data.tipo_negocio;\n  if (data.faturamento) map[\"Faturamento\"] = data.faturamento;\n  if (data.instagram) map[\"Instagram\"] = data.instagram;\n  if (data.site) map[\"Site\"] = data.site;\n  \n  if (data.campos_customizados && Array.isArray(data.campos_customizados)) {\n    data.campos_customizados.forEach(function(cf) {\n      if (cf.label && cf.valor) {\n        map[cf.label] = cf.valor;\n      }\n    });\n  }\n  \n  map[\"Score (0-100)\"] = data.score !== undefined ? data.score : 0;\n  map[\"Status\"] = data.status_qualificacao || \"\";\n  if (data.knockout_motivo) map[\"Motivo Knockout\"] = data.knockout_motivo;\n  \n  var utms = data.utms || {};\n  if (utms.utm_source || data.utm_source) map[\"UTM Source\"] = utms.utm_source || data.utm_source;\n  if (utms.utm_campaign || data.utm_campaign) map[\"UTM Campaign\"] = utms.utm_campaign || data.utm_campaign;\n  if (utms.utm_medium || data.utm_medium) map[\"UTM Medium\"] = utms.utm_medium || data.utm_medium;\n  \n  // Extrai todas as perguntas respondidas para colunas dedicadas\n  var respostas = data.respostas || [];\n  var resumoGeral = [];\n  respostas.forEach(function(r, i) {\n    var pilarTxt = r.pilar ? \"[\" + r.pilar + \"] \" : \"\";\n    var perguntaTxt = r.pergunta || r.question || (\"Pergunta \" + (i + 1));\n    var respostaTxt = (r.txt || r.text || r.resposta || \"\") + \" (\" + (r.score !== undefined ? r.score : 0) + \" pts)\";\n    var pHeader = \"P\" + (i + 1) + \": \" + pilarTxt + perguntaTxt;\n    map[pHeader] = respostaTxt;\n    resumoGeral.push(\"P\" + (i + 1) + \". \" + pilarTxt + perguntaTxt + \"\\n➜ Resposta: \" + respostaTxt);\n  });\n  \n  map[\"Resumo Geral\"] = resumoGeral.join(\"\\n\\n\");\n  map[\"Status_CRM\"] = (data.status_crm || \"novo\").toLowerCase();\n  return map;\n}\n\nfunction criarCabecalhosDinamicos(sheet, leadMap) {\n  var headers = Object.keys(leadMap);\n  sheet.appendRow(headers);\n  var headerRange = sheet.getRange(1, 1, 1, headers.length);\n  headerRange.setBackground(\"#0f172a\")\n             .setFontColor(\"#ffffff\")\n             .setFontWeight(\"bold\")\n             .setFontSize(10)\n             .setHorizontalAlignment(\"center\")\n             .setWrap(true);\n  sheet.setFrozenRows(1);\n  sheet.setRowHeight(1, 45);\n}\n\nfunction garantirColunasExistentes(sheet, leadMap) {\n  var lastCol = sheet.getLastColumn();\n  if (lastCol === 0) return;\n  var existingHeaders = sheet.getRange(1, 1, 1, lastCol).getValues()[0];\n  var existingMap = {};\n  existingHeaders.forEach(function(h) { existingMap[(h || \"\").toString().toLowerCase().trim()] = true; });\n  \n  var novasColunas = [];\n  for (var k in leadMap) {\n    if (k === \"Resumo Geral\") continue;\n    if (!existingMap[k.toLowerCase().trim()]) {\n      novasColunas.push(k);\n    }\n  }\n  \n  if (novasColunas.length > 0) {\n    novasColunas.forEach(function(nc) {\n      sheet.insertColumnBefore(lastCol);\n      sheet.getRange(1, lastCol).setValue(nc)\n           .setBackground(\"#0f172a\")\n           .setFontColor(\"#ffffff\")\n           .setFontWeight(\"bold\")\n           .setFontSize(10)\n           .setHorizontalAlignment(\"center\")\n           .setWrap(true);\n      lastCol++;\n    });\n  }\n}\n\n// ============================================================================\n// HOSPEDAGEM & PUBLICAÇÃO DE QUALIFICADORES LST (HTML DIRETO NA NUVEM)\n// ============================================================================\n\nfunction salvarEPublicarLST(params, e) {\n  try {\n    var htmlContent = (params.htmlContent || params.html || \"\").trim();\n    if (!htmlContent) {\n      return responderJSON({ success: false, message: \"Conteúdo HTML não informado para publicação.\" }, e);\n    }\n\n    var lstId = (params.lstId || params.slug || \"ativo\").toLowerCase().replace(/[^a-z0-9_-]/g, \"\");\n    var fileName = \"lst_publicado_\" + lstId + \".html\";\n\n    var file = null;\n    try {\n      var files = DriveApp.getFilesByName(fileName);\n      var updated = 0;\n      while (files.hasNext()) {\n        file = files.next();\n        file.setContent(htmlContent);\n        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);\n        updated++;\n      }\n      if (updated === 0) {\n        file = DriveApp.createFile(fileName, htmlContent, MimeType.HTML);\n        file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);\n      }\n    } catch(driveErr) {}\n\n    // Sempre salva redundante na aba oculta _LST_STORAGE_ da planilha\n    salvarHtmlNaAba(lstId, htmlContent);\n\n    var webAppUrl = ScriptApp.getService().getUrl() || \"\";\n    var liveUrl = webAppUrl ? (webAppUrl + (webAppUrl.indexOf(\"?\") >= 0 ? \"&\" : \"?\") + \"lst=\" + encodeURIComponent(lstId)) : (file ? file.getUrl() : \"\");\n\n    return responderJSON({\n      success: true,\n      url: liveUrl,\n      lstId: lstId,\n      message: \"Qualificador LST publicado com sucesso no Google Apps Script!\"\n    }, e);\n  } catch (err) {\n    return responderJSON({ success: false, message: \"Erro ao publicar LST: \" + err.toString() }, e);\n  }\n}\n\nfunction salvarHtmlNaAba(lstId, htmlContent) {\n  try {\n    var ss = SpreadsheetApp.getActiveSpreadsheet();\n    var sheet = ss.getSheetByName(\"_LST_STORAGE_\");\n    if (!sheet) {\n      sheet = ss.insertSheet(\"_LST_STORAGE_\");\n      sheet.appendRow([\"ID\", \"HTML_BASE64\", \"Atualizado_Em\"]);\n      try { sheet.hideSheet(); } catch(he) {}\n    }\n    var base64 = Utilities.base64Encode(Utilities.newBlob(htmlContent).getBytes());\n    sheet.appendRow([lstId, base64, Utilities.formatDate(new Date(), \"GMT-3\", \"dd/MM/yyyy HH:mm:ss\")]);\n    var webAppUrl = ScriptApp.getService().getUrl() || \"\";\n    var liveUrl = webAppUrl ? (webAppUrl + (webAppUrl.indexOf(\"?\") >= 0 ? \"&\" : \"?\") + \"lst=\" + encodeURIComponent(lstId)) : \"\";\n    return {\n      success: true,\n      url: liveUrl,\n      lstId: lstId,\n      message: \"Qualificador salvo com sucesso na planilha!\"\n    };\n  } catch(e) {\n    return { success: false, message: \"Erro no armazenamento: \" + e.toString() };\n  }\n}\n\nfunction servirHtmlLST(lstId) {\n  try {\n    var cleanId = (lstId || \"ativo\").toLowerCase().replace(/[^a-z0-9_-]/g, \"\");\n    var fileName = \"lst_publicado_\" + cleanId + \".html\";\n\n    // 1. Prioridade: busca na aba de armazenamento oculta _LST_STORAGE_ (mais recente primeiro)\n    var ss = SpreadsheetApp.getActiveSpreadsheet();\n    var sheet = ss.getSheetByName(\"_LST_STORAGE_\");\n    if (sheet) {\n      var data = sheet.getDataRange().getValues();\n      for (var i = data.length - 1; i >= 1; i--) {\n        if ((data[i][0] === cleanId || cleanId === \"ativo\" || !cleanId) && data[i][1]) {\n          var bytes = Utilities.base64Decode(data[i][1]);\n          var content = Utilities.newBlob(bytes).getDataAsString();\n          return HtmlService.createHtmlOutput(content)\n            .setTitle(\"Qualificador LST\")\n            .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)\n            .addMetaTag(\"viewport\", \"width=device-width, initial-scale=1.0\");\n        }\n      }\n    }\n\n    // 2. Fallback no Google Drive\n    try {\n      var files = DriveApp.getFilesByName(fileName);\n      if (files.hasNext()) {\n        var content = files.next().getBlob().getDataAsString();\n        return HtmlService.createHtmlOutput(content)\n          .setTitle(\"Qualificador LST\")\n          .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)\n          .addMetaTag(\"viewport\", \"width=device-width, initial-scale=1.0\");\n      }\n    } catch(driveErr) {}\n  } catch(e) {}\n\n  return HtmlService.createHtmlOutput(\n    \"<div style='font-family:system-ui,-apple-system,sans-serif;padding:50px 20px;text-align:center;background:#090d16;color:#f1f5f9;min-height:100vh;box-sizing:border-box;'>\" +\n    \"<div style='max-width:520px;margin:30px auto;background:#111827;padding:36px;border-radius:20px;border:1px solid #1f2937;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);'>\" +\n    \"<div style='font-size:36px;margin-bottom:12px;'>⚡</div>\" +\n    \"<h2 style='color:#38bdf8;margin:0 0 8px 0;font-size:22px;font-weight:800;'>FNW LST Webhook Master v5.7.0</h2>\" +\n    \"<p style='color:#94a3b8;font-size:14px;line-height:1.6;margin-bottom:20px;'>O Webhook e CRM estão <strong style='color:#34d399;'>ONLINE e 100% ativos</strong> nesta planilha!</p>\" +\n    \"<div style='background:#1f2937;padding:14px;border-radius:12px;border:1px solid #374151;text-align:left;font-size:12px;color:#cbd5e1;line-height:1.5;'>\" +\n    \"<div>✓ <strong>Receptor de Leads:</strong> Ativo</div>\" +\n    \"<div>✓ <strong>Sincronização de CRM:</strong> Ativa</div>\" +\n    \"<div>✓ <strong>Hospedagem Web:</strong> Ativa</div>\" +\n    \"</div>\" +\n    \"<p style='color:#64748b;font-size:11px;margin-top:20px;'>Para ver um qualificador aqui, publique através do Studio ou adicione <code>?lst=sua_marca</code> na URL.</p>\" +\n    \"</div></div>\"\n  ).setTitle(\"FNW LST Master Webhook\");\n}\n\nfunction responderJSON(objeto, e) {\n  var callback = (e && e.parameter && (e.parameter.callback || e.parameter.prefix));\n  if (callback) {\n    return ContentService.createTextOutput(callback + \"(\" + JSON.stringify(objeto) + \")\")\n      .setMimeType(ContentService.MimeType.JAVASCRIPT);\n  }\n  return ContentService.createTextOutput(JSON.stringify(objeto))\n    .setMimeType(ContentService.MimeType.JSON);\n}\n";
 
 function openGoogleAppsScriptModal() {
   const codeArea = document.getElementById('gas-script-code-area');
@@ -17598,11 +17812,11 @@ function buildFullWorkspaceBundle() {
   const allModels = getAllGalleryModels(true, true);
   
   return {
-    version: "5.6.4",
+    version: "5.7.0",
     format: "FNW_LST_FULL_BACKUP",
     type: "lst_full_workspace_backup",
     exportedAt: new Date().toISOString(),
-    system: "LST Studio v5.6.4 (FNW Ecosystem)",
+    system: "LST Studio v5.7.0 (FNW Ecosystem)",
     activeModelId: currentActiveModelId || 'native_fnw',
     activeConfig: JSON.parse(JSON.stringify(currentConfig)),
     galleryModels: allModels,
@@ -18789,31 +19003,55 @@ function populateFormFromConfig() {
   if (elP3Text) elP3Text.value = dr.points?.[2]?.text || '';
   if (elConc) elConc.value = dr.conclusion || '';
 
-  // Sincroniza Comunicação de Resultados (Score Tiers)
+  // Sincroniza Comunicação de Resultados (Score Tiers & Binary v5.7)
+  const modeVal = currentConfig.classificationMode || 'binary';
+  currentConfig.classificationMode = modeVal;
+  
   const stTiers = normalizeScoreTiers(currentConfig.scoreTiers, currentConfig.minScore || 65);
   currentConfig.scoreTiers = stTiers;
 
+  const binResults = normalizeBinaryResults(currentConfig.binaryResults, stTiers, currentConfig.minScore || 65);
+  currentConfig.binaryResults = binResults;
+
   const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
 
+  // Modo Binário Inputs
+  setVal('cfg-binary-qual-badge', binResults.qualified.badge);
+  setVal('cfg-binary-qual-title', binResults.qualified.title);
+  setVal('cfg-binary-qual-desc', binResults.qualified.desc);
+  setVal('cfg-binary-qual-btn', binResults.qualified.btnText);
+
+  setVal('cfg-binary-desqual-badge', binResults.disqualified.badge);
+  setVal('cfg-binary-desqual-title', binResults.disqualified.title);
+  setVal('cfg-binary-desqual-desc', binResults.disqualified.desc);
+  setVal('cfg-binary-desqual-btn', binResults.disqualified.btnText);
+
+  // Modo Escalonado Inputs
+  setVal('cfg-tier-low-name', stTiers.low.name || 'Exploração');
   setVal('cfg-tier-low-badge', stTiers.low.badge);
   setVal('cfg-tier-low-title', stTiers.low.title);
   setVal('cfg-tier-low-desc', stTiers.low.desc);
   setVal('cfg-tier-low-btn', stTiers.low.btnText);
 
+  setVal('cfg-tier-mid-name', stTiers.mid.name || 'Oportunidade em desenvolvimento');
   setVal('cfg-tier-mid-badge', stTiers.mid.badge);
   setVal('cfg-tier-mid-title', stTiers.mid.title);
   setVal('cfg-tier-mid-desc', stTiers.mid.desc);
   setVal('cfg-tier-mid-btn', stTiers.mid.btnText);
 
+  setVal('cfg-tier-high-name', stTiers.high.name || 'Oportunidade');
   setVal('cfg-tier-high-badge', stTiers.high.badge);
   setVal('cfg-tier-high-title', stTiers.high.title);
   setVal('cfg-tier-high-desc', stTiers.high.desc);
   setVal('cfg-tier-high-btn', stTiers.high.btnText);
 
+  setVal('cfg-tier-elite-name', stTiers.elite.name || 'Prioridade');
   setVal('cfg-tier-elite-badge', stTiers.elite.badge);
   setVal('cfg-tier-elite-title', stTiers.elite.title);
   setVal('cfg-tier-elite-desc', stTiers.elite.desc);
   setVal('cfg-tier-elite-btn', stTiers.elite.btnText);
+
+  setClassificationMode(modeVal, true);
 
   // Dados Empresa
   const comp = currentConfig.company || {};
@@ -19565,16 +19803,115 @@ Retorne ESTRITAMENTE o JSON no formato:
   }
 }
 
+function setClassificationMode(mode, skipSync = false) {
+  currentConfig.classificationMode = mode;
+  const isBinary = mode === 'binary';
+
+  const btnBin = document.getElementById('btn-classification-binary');
+  const btnTier = document.getElementById('btn-classification-tiered');
+  const modeBadge = document.getElementById('classification-mode-badge');
+  const modeDesc = document.getElementById('classification-mode-desc');
+  const boxBin = document.getElementById('container-results-binary');
+  const boxTier = document.getElementById('container-results-tiered');
+  const simBin = document.getElementById('sim-buttons-binary');
+  const simTier = document.getElementById('sim-buttons-tiered');
+
+  if (btnBin) {
+    if (isBinary) {
+      btnBin.className = 'py-2.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 border cursor-pointer bg-blue-600 text-white border-blue-500 shadow-md';
+    } else {
+      btnBin.className = 'py-2.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 border cursor-pointer bg-neutral-900/80 text-neutral-400 border-neutral-800 hover:text-white';
+    }
+  }
+
+  if (btnTier) {
+    if (!isBinary) {
+      btnTier.className = 'py-2.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 border cursor-pointer bg-blue-600 text-white border-blue-500 shadow-md';
+    } else {
+      btnTier.className = 'py-2.5 px-3 rounded-lg text-xs font-bold transition flex items-center justify-center gap-2 border cursor-pointer bg-neutral-900/80 text-neutral-400 border-neutral-800 hover:text-white';
+    }
+  }
+
+  if (modeBadge) {
+    modeBadge.textContent = isBinary ? 'Modo Binário' : 'Modo Escalonado';
+    modeBadge.className = isBinary 
+      ? 'text-[9px] font-black uppercase px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 border border-blue-500/30'
+      : 'text-[9px] font-black uppercase px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30';
+  }
+
+  if (modeDesc) {
+    modeDesc.innerHTML = isBinary
+      ? '<strong>Modo Binário:</strong> O lead é classificado estritamente como <strong>Qualificado</strong> (acesso ao WhatsApp comercial liberado) ou <strong>Não Qualificado</strong> (contato bloqueado, direcionando para diretrizes educativas), com base na Nota Mínima de Corte.'
+      : '<strong>Modo Escalonado:</strong> O resultado é classificado em 4 faixas de maturidade (ex: Exploração, Oportunidade em desenvolvimento, Oportunidade e Prioridade). <strong>A Nota Mínima de Corte continua sendo a regra soberana para liberar o contato comercial.</strong>';
+  }
+
+  if (boxBin) boxBin.style.display = isBinary ? 'block' : 'none';
+  if (boxTier) boxTier.style.display = isBinary ? 'none' : 'block';
+  if (simBin) simBin.style.display = isBinary ? 'flex' : 'none';
+  if (simTier) simTier.style.display = isBinary ? 'none' : 'flex';
+
+  updateClassificationLabels();
+
+  if (!skipSync) {
+    updateScoreTiersFromInputs();
+    refreshPreview();
+    showToast(isBinary ? '⚖️ Modo de Classificação Binário ativado!' : '📈 Modo de Classificação Escalonado ativado!');
+  }
+}
+
+function updateClassificationLabels() {
+  const minScore = parseInt(document.getElementById('cfg-minScore')?.value) || currentConfig.minScore || 65;
+  document.querySelectorAll('.lbl-min-score').forEach(el => el.textContent = minScore);
+  document.querySelectorAll('.lbl-mid-max').forEach(el => el.textContent = Math.max(minScore - 1, 40));
+
+  // Atualiza indicadores dinâmicos de contato nos tiers
+  const tierLowBadge = document.getElementById('tier-low-lock-badge');
+  const tierMidBadge = document.getElementById('tier-mid-lock-badge');
+  const tierHighBadge = document.getElementById('tier-high-lock-badge');
+  const tierEliteBadge = document.getElementById('tier-elite-lock-badge');
+
+  if (tierLowBadge) tierLowBadge.textContent = '🔒 Contato Bloqueado (Score < ' + minScore + ')';
+  if (tierMidBadge) tierMidBadge.textContent = '🔒 Contato Bloqueado (Score < ' + minScore + ')';
+  if (tierHighBadge) tierHighBadge.textContent = '🟢 Contato Comercial Liberado (Score >= ' + minScore + ')';
+  if (tierEliteBadge) tierEliteBadge.textContent = '🚀 Contato Comercial Liberado (Prioridade)';
+}
+
 function updateScoreTiersFromInputs() {
-  const minScore = parseInt(document.getElementById('cfg-minScore')?.value) || 65;
+  const minScore = parseInt(document.getElementById('cfg-minScore')?.value) || currentConfig.minScore || 65;
   if (!currentConfig.scoreTiers) currentConfig.scoreTiers = normalizeScoreTiers(null, minScore);
+  if (!currentConfig.binaryResults) currentConfig.binaryResults = normalizeBinaryResults(null, currentConfig.scoreTiers, minScore);
 
   const getVal = (id, fallback) => (document.getElementById(id)?.value || '').trim() || fallback;
 
+  // 1. Atualiza Modo Binário
+  currentConfig.binaryResults.qualified = {
+    badge: getVal('cfg-binary-qual-badge', '⚡ PERFIL QUALIFICADO & APTO'),
+    badgeColor: 'var(--plug-gold)',
+    cardBg: 'rgba(0, 112, 243, 0.08)',
+    borderColor: 'rgba(0, 112, 243, 0.3)',
+    title: getVal('cfg-binary-qual-title', 'Qualificação Comercial Aprovada'),
+    desc: getVal('cfg-binary-qual-desc', 'Parabéns! Sua maturidade comercial, capacidade de atendimento e prontidão atendem aos critérios prioritários. Seu relatório foi aprovado e nossa equipe já pode recebê-lo.'),
+    btnText: getVal('cfg-binary-qual-btn', '💬 RECEBER PROPOSTA NO WHATSAPP ›'),
+    action: 'whatsapp'
+  };
+
+  currentConfig.binaryResults.disqualified = {
+    badge: getVal('cfg-binary-desqual-badge', '🌱 DIAGNÓSTICO EDUCATIVO / NÃO QUALIFICADO'),
+    badgeColor: '#94a3b8',
+    cardBg: 'rgba(148, 163, 184, 0.05)',
+    borderColor: 'rgba(148, 163, 184, 0.2)',
+    title: getVal('cfg-binary-desqual-title', 'Diagnóstico de Estruturação & Alinhamento'),
+    desc: getVal('cfg-binary-desqual-desc', 'Seu momento atual requer a organização do essencial antes de acelerar. Investir em campanhas de escala ou consultorias avançadas agora geraria desperdício financeiro. O foco precisa ser arrumar a base primeiro.'),
+    btnText: getVal('cfg-binary-desqual-btn', '📖 VER O QUE AJUSTAR PRIMEIRO ›'),
+    action: 'drawer'
+  };
+
+  // 2. Atualiza Modo Escalonado (4 Tiers)
   currentConfig.scoreTiers.low = {
+    name: getVal('cfg-tier-low-name', 'Exploração'),
     min: 0,
     max: 39,
-    badge: getVal('cfg-tier-low-badge', '🌱 MOMENTO INICIAL / PASSO ZERO'),
+    badge: getVal('cfg-tier-low-badge', '🌱 EXPLORAÇÃO / MOMENTO INICIAL'),
     badgeColor: '#94a3b8',
     cardBg: 'rgba(148, 163, 184, 0.05)',
     borderColor: 'rgba(148, 163, 184, 0.2)',
@@ -19585,9 +19922,10 @@ function updateScoreTiersFromInputs() {
   };
 
   currentConfig.scoreTiers.mid = {
+    name: getVal('cfg-tier-mid-name', 'Oportunidade em desenvolvimento'),
     min: 40,
-    max: minScore - 1,
-    badge: getVal('cfg-tier-mid-badge', '⚖️ MOMENTO DE AJUSTE & TRANSIÇÃO'),
+    max: Math.max(minScore - 1, 40),
+    badge: getVal('cfg-tier-mid-badge', '⚖️ OPORTUNIDADE EM DESENVOLVIMENTO'),
     badgeColor: '#3b82f6',
     cardBg: 'rgba(59, 130, 246, 0.06)',
     borderColor: 'rgba(59, 130, 246, 0.25)',
@@ -19598,9 +19936,10 @@ function updateScoreTiersFromInputs() {
   };
 
   currentConfig.scoreTiers.high = {
+    name: getVal('cfg-tier-high-name', 'Oportunidade'),
     min: minScore,
     max: 84,
-    badge: getVal('cfg-tier-high-badge', '⚡ PERFIL QUALIFICADO & APTO'),
+    badge: getVal('cfg-tier-high-badge', '⚡ OPORTUNIDADE QUALIFICADA'),
     badgeColor: 'var(--plug-gold)',
     cardBg: 'rgba(0, 112, 243, 0.08)',
     borderColor: 'rgba(0, 112, 243, 0.3)',
@@ -19611,9 +19950,10 @@ function updateScoreTiersFromInputs() {
   };
 
   currentConfig.scoreTiers.elite = {
+    name: getVal('cfg-tier-elite-name', 'Prioridade'),
     min: 85,
     max: 100,
-    badge: getVal('cfg-tier-elite-badge', '🏆 ALTA PRIORIDADE & ELEGIBILIDADE MÁXIMA'),
+    badge: getVal('cfg-tier-elite-badge', '🏆 ALTA PRIORIDADE COMERCIAL'),
     badgeColor: '#10b981',
     cardBg: 'rgba(16, 185, 129, 0.08)',
     borderColor: 'rgba(16, 185, 129, 0.35)',
@@ -19623,6 +19963,7 @@ function updateScoreTiersFromInputs() {
     action: 'whatsapp'
   };
 
+  updateClassificationLabels();
   refreshPreview();
 }
 
@@ -25465,8 +25806,11 @@ function generateCompleteHTML(config) {
     <span style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; padding:4px 8px; border-radius:6px; background:rgba(0,112,243,0.12); color:var(--plug-gold); flex-shrink:0;">${escapedHeaderBadge}</span>
   ` : '';
 
+  const classificationModeVal = config.classificationMode || 'binary';
   const stTiers = normalizeScoreTiers(config.scoreTiers, minScoreVal);
+  const binResults = normalizeBinaryResults(config.binaryResults, stTiers, minScoreVal);
   const scoreTiersJSON = JSON.stringify(stTiers);
+  const binaryResultsJSON = JSON.stringify(binResults);
 
   const dr = normalizeDrawer(config.drawer, config.drawerText);
   const escapedDrawerTitle = (dr.title || 'DIRETRIZES DE ENTRADA & QUALIFICAÇÃO').replace(/</g, '&lt;');
@@ -26311,11 +26655,13 @@ ${leadFormFieldsHTML}      <button class="w-full py-4 btn-action mt-2 shadow-xl"
 
 <script>
 const questions = ${configJSON};
+const classificationMode = "${classificationModeVal}";
+const binaryResults = ${binaryResultsJSON};
+const scoreTiers = ${scoreTiersJSON};
 const minScore = ${minScoreVal};
 const targetWhatsapp = "${whatsappNumber}";
 const webhookEndpoints = ${JSON.stringify(webhookUrlsList)};
 const webhookEndpoint = webhookEndpoints[0] || "";
-const scoreTiers = ${scoreTiersJSON};
 const destConfig = {
   type: "${destType}",
   customUrl: "${(destCfg.customUrl || '').replace(/"/g, '\\"')}",
@@ -26409,7 +26755,13 @@ document.addEventListener('click', function(e) {
 // ==========================================
 function buildWhatsAppDiagnosticMessage(score, customInfo, customAnswers) {
   var totalScore = typeof score === 'number' ? score : 85;
-  var statusTexto = totalScore >= 85 ? '🏆 ALTA PRIORIDADE (SCORE ELITE)' : (totalScore >= minScore ? '⚡ QUALIFICADO' : (totalScore >= 40 ? '⚖️ EM ANÁLISE / AJUSTE FINO' : '⛔ REPROVADO / EDUCATIVO'));
+  var statusTexto = '';
+  if (classificationMode === 'binary') {
+    statusTexto = totalScore >= minScore ? '⚡ QUALIFICADO' : '🌱 NÃO QUALIFICADO';
+  } else {
+    var stageName = totalScore >= 85 ? (scoreTiers.elite?.name || 'Prioridade') : (totalScore >= minScore ? (scoreTiers.high?.name || 'Oportunidade') : (totalScore >= 40 ? (scoreTiers.mid?.name || 'Oportunidade em desenvolvimento') : (scoreTiers.low?.name || 'Exploração')));
+    statusTexto = stageName + ' — ' + (totalScore >= minScore ? '⚡ QUALIFICADO' : '🌱 NÃO QUALIFICADO');
+  }
   
   var info = customInfo || {};
   var nome = info.nome || (document.getElementById('input-nome')?.value || '').trim() || 'Lead Interessado';
@@ -26518,15 +26870,30 @@ window.renderResultScreen = function(score, customData) {
   const scoreEl = document.getElementById('score-value');
   if (scoreEl) scoreEl.innerText = totalScore;
 
-  let tier = scoreTiers.low;
-  if (totalScore >= 85) {
-    tier = scoreTiers.elite;
-  } else if (totalScore >= minScore) {
-    tier = scoreTiers.high;
-  } else if (totalScore >= 40) {
-    tier = scoreTiers.mid;
+  let tier = null;
+  let isContactUnlocked = false;
+
+  if (classificationMode === 'binary') {
+    if (totalScore >= minScore) {
+      tier = binaryResults.qualified;
+      isContactUnlocked = true;
+    } else {
+      tier = binaryResults.disqualified;
+      isContactUnlocked = false;
+    }
   } else {
-    tier = scoreTiers.low;
+    // Modo Escalonado (4 faixas)
+    if (totalScore >= 85) {
+      tier = scoreTiers.elite;
+    } else if (totalScore >= minScore) {
+      tier = scoreTiers.high;
+    } else if (totalScore >= 40) {
+      tier = scoreTiers.mid;
+    } else {
+      tier = scoreTiers.low;
+    }
+    // Regra Soberana: a nota mínima de corte continua sendo a regra para liberar o contato comercial
+    isContactUnlocked = totalScore >= minScore;
   }
 
   const resStatus = document.getElementById('result-status');
@@ -26550,7 +26917,7 @@ window.renderResultScreen = function(score, customData) {
 
   if (btnCta) {
     btnCta.innerText = tier.btnText;
-    if (tier.action === 'whatsapp') {
+    if (isContactUnlocked) {
       btnCta.onclick = null;
       var targetUrl = '';
       
@@ -27181,6 +27548,8 @@ function generateResult(e) {
       score: totalScore,
       pontos_extras_form: formExtraScore,
       status_qualificacao: hasKnockout ? 'DESQUALIFICADO_KNOCKOUT' : (isQual ? 'QUALIFICADO' : 'DESQUALIFICADO'),
+      classificacao_modo: classificationMode,
+      classificacao_estagio: classificationMode === 'binary' ? (isQual ? 'Qualificado' : 'Não Qualificado') : (totalScore >= 85 ? (scoreTiers.elite?.name || 'Prioridade') : (totalScore >= minScore ? (scoreTiers.high?.name || 'Oportunidade') : (totalScore >= 40 ? (scoreTiers.mid?.name || 'Oportunidade em desenvolvimento') : (scoreTiers.low?.name || 'Exploração')))),
       knockout_motivo: knockoutMotivo || null,
       utms: pageUtms,
       respostas: respostasCompletas,
@@ -29794,7 +30163,7 @@ function saveActiveSheetConfigFromModal() {
 
 
 // =============================================================================
-// FNW LST ECOSYSTEM v5.6.4 - GUIA INTERATIVO DO CONSTRUTOR (ONBOARDING OVERLAY)
+// FNW LST ECOSYSTEM v5.7.0 - GUIA INTERATIVO DO CONSTRUTOR (ONBOARDING OVERLAY)
 // =============================================================================
 const ONBOARDING_STEPS_DATA = [
   {
@@ -30011,7 +30380,7 @@ function renderOnboardingStep() {
   }
 }
 
-// Utilitários de navegação suave e destaque visual para o Estúdio (v5.6.4)
+// Utilitários de navegação suave e destaque visual para o Estúdio (v5.7.0)
 function scrollToStudioSection(targetEl) {
   if (!targetEl) return;
   const scrollContainer = document.getElementById('panel-editor-scroll') || document.getElementById('advanced-mode-wrapper') || window;
@@ -30270,7 +30639,7 @@ async function publishToGoogleAppsScript() {
   }
 }
 
-// Transmissão de payload para o Google Apps Script sem bloqueio de CORS (v5.6.4)
+// Transmissão de payload para o Google Apps Script sem bloqueio de CORS (v5.7.0)
 function enviarPayloadAppsScriptSemCors(endpointUrl, payload) {
   try {
     // Canal 1: Fetch direto no-cors (entrega transparente e imediata ao Google Apps Script)
@@ -30410,7 +30779,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <div class="flex items-center justify-center gap-2">
           <span class="text-2xl font-black text-white tracking-tight leading-none">LST</span>
           <span class="text-2xl font-black text-blue-400 tracking-tight leading-none">Studio</span>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono bg-blue-500/20 text-blue-400 border border-blue-500/40 shadow-sm">v5.6.0</span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-black font-mono bg-blue-500/20 text-blue-400 border border-blue-500/40 shadow-sm">v5.7.0</span>
         </div>
         <p class="text-neutral-300 text-xs mt-1.5 font-semibold">Autenticação &amp; Gestão de Acesso</p>
       </div>
@@ -30592,7 +30961,7 @@ window.addEventListener('DOMContentLoaded', () => {
           <div>
             <div class="flex items-center gap-2">
               <h3 class="text-base font-black uppercase tracking-wide">Central de Publicação &amp; Links LST</h3>
-              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded font-mono border" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); color: var(--theme-c1, #3b82f6); border-color: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.35);">v5.6.4 Live</span>
+              <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded font-mono border" style="background: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.15); color: var(--theme-c1, #3b82f6); border-color: rgba(var(--theme-c1-rgb, 59, 130, 246), 0.35);">v5.7.0 Live</span>
             </div>
             <p class="text-xs mt-0.5" style="color: var(--text-muted, #94a3b8);">Aprenda a colocar seu qualificador no ar em 1 minuto ou integrá-lo em qualquer site.</p>
           </div>
@@ -30601,7 +30970,7 @@ window.addEventListener('DOMContentLoaded', () => {
       </div>
 
       <!-- CARDS DE MÉTODOS DE PUBLICAÇÃO -->
-      <!-- RESULTADO DA PUBLICAÇÃO AUTOMÁTICA (v5.6.4 High Visibility) -->
+      <!-- RESULTADO DA PUBLICAÇÃO AUTOMÁTICA (v5.7.0 High Visibility) -->
       <div id="publish-hub-live-result" class="p-5 rounded-2xl border hidden space-y-3.5 transition-all shadow-xl" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.5);">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -30775,7 +31144,7 @@ window.addEventListener('DOMContentLoaded', () => {
         <button type="button" onclick="closeOnboardingOverlay()" class="tool-btn !p-2 !rounded-xl text-lg cursor-pointer hover:opacity-80" title="Fechar guia">✕</button>
       </div>
 
-      <!-- STEPPER INDICATOR (1 A 6) (v5.6.4) -->
+      <!-- STEPPER INDICATOR (1 A 6) (v5.7.0) -->
       <div class="grid grid-cols-6 gap-1.5 sm:gap-2">
         <button type="button" onclick="goToOnboardingStep(0)" ondblclick="jumpFromOnboardingToStudio()" class="onboard-step-pill p-2 rounded-xl border text-center transition cursor-pointer" id="onboard-pill-0" title="Passo 1: Criação &amp; Dados Gerais (Clique para ver detalhes)">
           <div class="text-[10px] font-mono font-bold">1</div>
